@@ -1,0 +1,66 @@
+.kanit{
+    font-family: 'kanit',sans-serif;
+}
+.kanitlight{
+    font-family: 'kanit',sans-serif;
+    font-weight: 300;
+}
+/*header*/
+
+img.img-logo{
+    width:35px;
+    height: 35px;
+    margin-top:0.25em;
+    margin-right:0.25em;
+    margin-left:0.5em;
+}
+div.flexdiv{
+    display:flex;
+}
+.mynav{
+    border-bottom: none;
+    box-shadow: 0px 0px;
+}
+
+/*frontpage*/
+hr.hr-front{
+    border: solid lightgray 0.5px;
+}
+.fronttitle{
+    font-size: 20px;
+}
+div.flexdiv2{
+    display: flex;
+    flex-wrap: wrap;
+}
+.frontpage-club{
+    max-width: 80px;
+    margin-left: 0.5em;
+    margin-right:0.5em;
+}
+.flexscroll{
+    overflow-x: auto;
+}
+
+div.flexdiv3{
+    display: -webkit-flex;
+}
+
+/*clubinfopage*/
+
+
+@media (max-width: 767.98px) { 
+    img.fanzone-2{
+        height: 80px;
+    }
+    .fanzone-1{
+        height: 160px;
+    }
+}
+
+
+/*admin panel*/
+img.admin-teamlogo{
+    height: 70px;
+    width:70px;
+}
