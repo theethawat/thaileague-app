@@ -3,7 +3,7 @@
 <div class="navbar-fixed ">
     <nav class="mynav">
     <div class="nav-wrapper  red accent-4 ">
-      <a href="#!" class="brand-logo"> 
+      <a href="../index" class="brand-logo"> 
             <div class="flexdiv">
                 <img class="img-logo"src="{{URL::asset('photo/thaileague.png')}}">
                 <h5 class="kanit head-font">โตโยต้า ไทยลีก</h5>

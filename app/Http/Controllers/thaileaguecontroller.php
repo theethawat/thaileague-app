@@ -16,7 +16,6 @@ class thaileaguecontroller extends Controller {
         return view('frontpage.front')->with('allteam',$team);
     }
     
-    
     public function clubinfo($club){
         $team = DB::table('clubinfo')->where('englishname',$club)->first();
         return view("frontpage.clubinfo")
