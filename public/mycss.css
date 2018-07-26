@@ -6,7 +6,9 @@
     font-weight: 300;
 }
 /*header*/
-
+.head-font{
+    font-size: 20px;
+}
 img.img-logo{
     width:35px;
     height: 35px;
@@ -47,8 +49,35 @@ div.flexdiv3{
 }
 
 /*clubinfopage*/
+img.stadium-photo{ /*for sometime case*/
+    width:100%;
+    height:250px;
+}
 
+img.biglogo{
+    width:100px;
+    height: 100px;
+    margin: 1em;
+}
+.clubname-head{
+        width: 250px;
+        margin-left: 30%;
+        margin-right: 30%;
+}
+.clubname-info{
+    padding-top:30px;
+}
 
+.club-tab::-webkit-scrollbar {
+    width: 0px;
+}
+
+    /*especially in media */
+@media (max-width: 575.98px) { 
+    .head-font{
+        font-size: 18px;
+    }
+ }
 @media (max-width: 767.98px) { 
     img.fanzone-2{
         height: 80px;
@@ -56,8 +85,25 @@ div.flexdiv3{
     .fanzone-1{
         height: 160px;
     }
+    
+    img.stadium-photo{
+        width:100%;
+        height:250px;
+    }
 }
-
+@media (min-width: 992px) {
+    img.stadium-photo{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width:70%;
+        height:400px;
+    }
+    .clubname-head{
+        margin-left: 2%;
+        margin-right: 0%;
+    }
+}
 
 /*admin panel*/
 img.admin-teamlogo{

@@ -6,7 +6,7 @@
       <a href="#!" class="brand-logo"> 
             <div class="flexdiv">
                 <img class="img-logo"src="{{URL::asset('photo/thaileague.png')}}">
-                <h5 class="kanit">โตโยต้า ไทยลีก</h5>
+                <h5 class="kanit head-font">โตโยต้า ไทยลีก</h5>
             </div>
           
       </a>
