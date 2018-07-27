@@ -33,6 +33,7 @@ class thaileaguecontroller extends Controller {
           $stadium=$request->input('homestadium');
           $website=$request->input('website');
           $facebook=$request->input('facebook');
+          $shortname=$request->input('short-name');
           $headcoach=$request->input('headcoach');
           $point=$request->input('point');
           $gd=$request->input('gd');
@@ -54,6 +55,7 @@ class thaileaguecontroller extends Controller {
               DB::table("clubinfo")->insert(
                   ['englishname'=>$engname,
                   'thainame'=>$thaname,
+                  'shortname'=>$shortname,
                   'logo'=>$fileurl1,
                   'homestadium'=>$stadium,
                   'homestadiumphoto'=>$fileurl2,

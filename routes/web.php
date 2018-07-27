@@ -22,3 +22,4 @@ Route::post('/addteam', 'thaileaguecontroller@teamadd');
 Route::get('/admin/allteam', 'thaileaguecontroller@adminteam');
 Route::get('/clubinfo/{club}','thaileaguecontroller@clubinfo');
 Route::get('/index','thaileaguecontroller@index');
+Route::get('/admin', 'HomeController@index')->name('home');

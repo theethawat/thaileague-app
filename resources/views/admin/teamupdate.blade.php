@@ -15,6 +15,9 @@
         <label class="kanit">ชื่อสโมสร ภาษาไทย <span class="kanitlight">ใส่ชื่อเต็มพร้อมสปอนเซอร์</span> </lebel>
         <input type="text" name="thai-name" class="form-control kanitlight" required >
 
+        <label class="kanit">ตัวอักษรย่อ <span class="kanitlight">ภาษาอังกฤษ ตัวพิมพ์ใหญ่ อ้างอิงตามเว็บไทยลีก</span> </lebel>
+        <input type="text" name="short-name" class="form-control kanitlight" required >
+
         <label class="kanit">ชื่อสนามเหย้า</lebel>
         <input type="text" name="homestadium"  class="form-control kanitlight" required>
 

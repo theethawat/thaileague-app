@@ -5,7 +5,7 @@
 <div class="red accent-4">
             <div class="flexdiv clubname-head ">
                 <img style="margin-right:0.5em;"class="img-logo"src="{{URL::asset($club->logo)}}">
-                <h6 class="kanit">{{$club->thainame}} </h6>
+                <h6 class="kanit clubname-head-text">{{$club->thainame}} </h6>
             </div>
 
 <div class="nav-content">

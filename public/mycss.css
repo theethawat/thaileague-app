@@ -60,16 +60,19 @@ img.biglogo{
     margin: 1em;
 }
 .clubname-head{
-        width: 250px;
+        width:270px;
         margin-left: 30%;
         margin-right: 30%;
+}
+.clubname-head-text{
+    width: 300px;
 }
 .clubname-info{
     padding-top:30px;
 }
 
 .club-tab::-webkit-scrollbar {
-    width: 0px;
+    height:  0px;
 }
 
     /*especially in media */
