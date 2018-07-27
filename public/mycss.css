@@ -5,6 +5,9 @@
     font-family: 'kanit',sans-serif;
     font-weight: 300;
 }
+.text-l1{
+    font-size: 16px;
+}
 /*header*/
 .head-font{
     font-size: 20px;

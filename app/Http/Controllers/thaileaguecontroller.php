@@ -33,6 +33,8 @@ class thaileaguecontroller extends Controller {
           $stadium=$request->input('homestadium');
           $website=$request->input('website');
           $facebook=$request->input('facebook');
+          $websitename=$request->input('website-name');
+          $facebookname=$request->input('facebook-name');
           $shortname=$request->input('short-name');
           $headcoach=$request->input('headcoach');
           $point=$request->input('point');
@@ -64,6 +66,8 @@ class thaileaguecontroller extends Controller {
                   'goalpoint'=>$gd,
                   'headcoach'=>$headcoach,
                   'history'=>$info,
+                  'websitename'=>$websitename,
+                  'facebookname'=>$facebookname,
                   'facebook'=>$facebook]
               );
               return Redirect::to('/admin/allteam');

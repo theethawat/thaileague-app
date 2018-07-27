@@ -27,8 +27,14 @@
         <label class="kanit">เว็บไซต์</lebel> <span class="kanitlight">ใส่ URL เว็บไซต์ ถ้าไม่มีให้ใส่ URLหน้า page เฟสบุ๊ค</span>
         <input type="url" name="website"  class="form-control kanitlight" required>
 
+        <label class="kanit">ชื่อเว็บไซต์ </lebel> <span class="kanitlight">ใส่อย่างย่อ เช่น chonburifc.com ถ้าสโมสรให้ใส่ No Site</span>
+        <input type="name" name="website-name"  class="form-control kanitlight" required value="No Site" >
+
         <label class="kanit">Facebook</lebel> <span class="kanitlight">ใส่ URLหน้า page เฟสบุ๊ค</span>
         <input type="url" name="facebook"  class="form-control kanitlight" required>
+
+        <label class="kanit">ชื่อเฟสบุ๊ค</lebel> <span class="kanitlight">ชื่อหน้าเพจในเฟสบุ๊ค</span>
+        <input type="name" name="facebook-name"  class="form-control kanitlight" required>
 
         <div class="row">
             <div class="col-sm">
