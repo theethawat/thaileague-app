@@ -10,7 +10,11 @@
       <!-- Compiled and minified CSS -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Kanit:300,400" rel="stylesheet"> 
+    
+    <link rel="stylesheet" href="{{URL::asset('flag/css/flag-icon.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('flag/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('mycss.css')}}">
+    
     <!-- JQuery -->
     <script
 			  src="https://code.jquery.com/jquery-3.3.1.js"

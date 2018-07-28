@@ -8,6 +8,9 @@
 .text-l1{
     font-size: 16px;
 }
+.text-l2{
+    font-size: 20px;
+}
 /*header*/
 .head-font{
     font-size: 20px;
@@ -73,10 +76,18 @@ img.biglogo{
 .clubname-info{
     padding-top:30px;
 }
-
 .club-tab::-webkit-scrollbar {
     height:  0px;
 }
+.flag-my-icon{
+    width: 40px;
+    height: 40px;
+}
+img.clubinfo-teamlogo{
+    height: 50px;
+    width:50px;
+}
+
 
     /*especially in media */
 @media (max-width: 575.98px) { 

@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
-@section('content')
+@section('content') 
+
+<meta http-equiv="refresh" content="0; url={{url('admin/allteam')}} " />
+<!--
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+               
                 <div class="card-header kanit">ระบบจัดการเบื้องหลัง Thaileague Unofficial Application</div>
 
                 <div class="card-body">
@@ -21,4 +25,5 @@
         </div>
     </div>
 </div>
+-->
 @endsection

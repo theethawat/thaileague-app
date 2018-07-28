@@ -55,7 +55,43 @@
 
 
 
-  <div id="player" class="col s12">รายชื่อผู้เล่น</div>
+  <div id="player" class="col s12">
+  <div class="container">
+  <table>
+        <thead>
+          <tr>
+              <th class="kanit">หมายเลข</th>
+              <th class="kanit">รูป</th>
+              <th class="kanit">ชื่อผู้เล่น</th>
+              <th class="kanit">ตำแหน่ง</th>
+              <th class="kanit">สัญชาติ</th>
+              <th class="kanit">ประตู</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        @foreach ($player as $play)
+          <tr>
+            <td scope="row" class="kanit text-l2">{{$play->number}} </th>
+            <td><img class="clubinfo-teamlogo" src="{{URL::asset($play->photo)}}"> </td>
+            <td class="kanitlight">{{$play->name}} </td>
+            <td class="kanitlight">{{$play->position}} </td>
+            <td class="kanitlight ic"><span class="flag-icon flag-my-icon flag-icon-{{$play->nationality}}"></span></td>
+            <td class="kanitlight">{{$play->goal}} </td>
+          </tr>
+          
+        @endforeach
+        </tbody>
+
+      </table>
+  </div><!--for container div-->
+  </div>
+
+
+
+
+
+
   <div id="result" class="col s12">ผลและตารางการแข่งขัน</div>
   <div id="test4" class="col s12">Test 4</div>
 

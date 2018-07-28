@@ -22,4 +22,9 @@ Route::post('/addteam', 'thaileaguecontroller@teamadd');
 Route::get('/admin/allteam', 'thaileaguecontroller@adminteam');
 Route::get('/clubinfo/{club}','thaileaguecontroller@clubinfo');
 Route::get('/index','thaileaguecontroller@index');
+
+//BLACK END
 Route::get('/admin', 'HomeController@index')->name('home');
+Route::get('/admin/addplayer/{clubcode}', 'thaileaguecontroller@addplayer');
+Route::get('/admin/player/{clubcode}', 'thaileaguecontroller@viewplayer');
+Route::post('/admin/playeradding', 'thaileaguecontroller@playeradd');
