@@ -40,6 +40,7 @@
             <p class="kanitlight">{{$club->history}}</p>
             <ul class="kanit text-l1">
                 <li> <i class="fas fa-user-alt"></i > หัวหน้าผู้ฝึกสอน <span class="kanitlight">{{$club->headcoach}} </span><li>
+                <li> <i class="fas fa-home"></i> สนามเหย้า <span class="kanitlight">{{$club->homestadium}} </span><li>
                 <li> <i class="fas fa-globe-asia"></i> เว็บไซต์สโมสร  <a href= "{{$club->website}}"> {{$club->websitename}} </a></li>
                 <li> <i class="fab fa-facebook-square"></i> เฟสบุ๊คสโมสร  <a href= "{{$club->facebook}}">{{$club->facebookname}}</a></li>
             </ul>
