@@ -16,9 +16,9 @@
         <input type="text" name="thai-name" class="form-control kanitlight" required >
 
         <label class="kanit">ตัวอักษรย่อ <span class="kanitlight">ภาษาอังกฤษ</span> </lebel>
-        <input type="text" name="short-name" class="form-control kanitlight" pattern="[a-z]" placeholder="ตัวพิมพ์เล็ก อ้างอิงตามเว็บไทยลีก" required >
+        <input type="text" name="short-name" class="form-control kanitlight" placeholder="ตัวพิมพ์เล็ก อ้างอิงตามเว็บไทยลีก" required >
 
-        <label class="kanit">ชื่อสนามเหย้า</lebel>s
+        <label class="kanit">ชื่อสนามเหย้า</lebel>
         <input type="text" name="homestadium"  class="form-control kanitlight" required>
 
         <label class="kanit">หัวหน้าผู้ฝึกสอน</lebel>

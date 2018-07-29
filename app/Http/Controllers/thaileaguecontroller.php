@@ -13,7 +13,10 @@ use Illuminate\Http\File;
 class thaileaguecontroller extends Controller {
     public function index(){
         $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
-        return view('frontpage.front')->with('allteam',$team);
+        $teamtable = DB::table('clubinfo')->orderBy('point','DESC')->orderBy('goalpoint','DESC')->take(5)->get();
+        return view('frontpage.front')
+        ->with('allteam',$team)
+        ->with('table',$teamtable);
     }
     
     public function clubinfo($club){
@@ -27,6 +30,18 @@ class thaileaguecontroller extends Controller {
         return view("frontpage.clubinfo")
         ->with('club',$team)
         ->with('player',$member);
+    }
+
+    public function clubranking(){
+        $teamtable = DB::table('clubinfo')->orderBy('point','DESC')->orderBy('goalpoint','DESC')->get();
+        return view('frontpage.table')
+        ->with('table',$teamtable);
+    }
+
+    public function allclubshow(){
+        $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
+        return view('frontpage.allclub')
+        ->with('allclub',$team);
     }
 
 //Backend Server
@@ -134,4 +149,17 @@ class thaileaguecontroller extends Controller {
             );
             return Redirect::to('/admin/allteam');
           }
+
+        public function adminallmatch(){
+            $match = DB::table("matchset")->orderBy('matchweek','ASC')->get();
+            return view("admin.allmatch")
+            ->with('matchshow',$match);
+        }
+
+        public function matchmaker($matchweek){
+            $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
+            return view("admin.matchmaker1")
+            ->with('club',$team)
+            ->with('matchweek',$matchweek);
+        }
 }

@@ -13,8 +13,38 @@
     </div>
 
     <div class="content c-table">
-        <h5 class="kanit fronttitle red-text text-accent-4"> League Table </h5><hr class="hr-front">
-        <br><br><br><br><br>
+        <h5 class="kanit fronttitle red-text text-accent-4"> League Table <a class="waves-effect waves-light btn  red accent-4 kanit" href="{{url('table')}}"> ดูตารางทั้งหมด </a> </h5> <hr class="hr-front">
+        <table>
+        <thead>
+          <tr>
+              <th class="kanit">อันดับ</th>
+              <th class="kanit">โลโก้</th>
+              <th class="kanit">ชื่อทีม</th>
+              <th class="kanit">คะแนน</th>
+              <th class="kanit">GD</th>
+          </tr>
+        </thead>
+        @php 
+        $i=1
+        @endphp
+        <tbody>
+        @foreach ($table as $rank)
+          <tr>
+            <td class="tablerank"scope="row" class="kanit text-l2"> @php echo $i; @endphp </th>
+            <td class="tablerank"><img class="frontpage1-teamlogo" src="{{URL::asset($rank->logo)}}"> </td>
+            <td class="kanitlight tablerank"><a href="clubinfo/{{$rank->englishname}}" class="black-text"> {{$rank->thainame}} </a></td>
+            <td class="kanitlight tablerank">{{$rank->point}} </td>
+            <td class="kanitlight tablerank">{{$rank->goalpoint}} </td>
+          </tr>
+          
+        @php
+        $i++
+        @endphp
+
+        @endforeach
+        </tbody>
+
+      </table>
     </div>
 
     <div class="content c-highlight">

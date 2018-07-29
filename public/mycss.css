@@ -30,6 +30,7 @@ div.flexdiv{
     box-shadow: 0px 0px;
 }
 
+
 /*frontpage*/
 hr.hr-front{
     border: solid lightgray 0.5px;
@@ -53,7 +54,14 @@ div.flexdiv2{
 div.flexdiv3{
     display: -webkit-flex;
 }
-
+.tablerank{
+    padding-top:0.25em;
+    padding-bottom: 0.25em;
+}
+.frontpage1-teamlogo{
+    width:30px;
+    height: 30px;
+}
 /*clubinfopage*/
 img.stadium-photo{ /*for sometime case*/
     width:100%;
@@ -88,7 +96,11 @@ img.clubinfo-teamlogo{
     width:50px;
 }
 
-
+/*clubtable page */
+.tournament-logo{
+    height: 70px;
+    width: 70px;
+}
     /*especially in media */
 @media (max-width: 575.98px) { 
     .head-font{
@@ -126,4 +138,11 @@ img.clubinfo-teamlogo{
 img.admin-teamlogo{
     height: 70px;
     width:70px;
+}
+.admin-badge{
+    font-size: 16px;
+}
+.admin-table-ovf{
+    max-width: 100px;
+    overflow: hidden;
 }
