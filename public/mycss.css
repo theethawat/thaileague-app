@@ -84,6 +84,7 @@ img.biglogo{
 .clubname-info{
     padding-top:30px;
 }
+
 .club-tab::-webkit-scrollbar {
     height:  0px;
 }
@@ -106,6 +107,9 @@ img.clubinfo-teamlogo{
     .head-font{
         font-size: 18px;
     }
+    .team-select{
+        padding-top:0px;
+    }
  }
 @media (max-width: 767.98px) { 
     img.fanzone-2{
@@ -118,6 +122,21 @@ img.clubinfo-teamlogo{
     img.stadium-photo{
         width:100%;
         height:250px;
+    }
+    .team-select{
+        padding-top:0px;
+    }
+}
+@media (min-width: 768px) { 
+    .team-select-flex{
+        display:-webkit-flex;
+        display:flex;
+    }
+}
+@media (max-width: 991.98px)  { 
+    .team-select{
+        padding-top:1em;
+        margin-left:1em;
     }
 }
 @media (min-width: 992px) {
@@ -132,6 +151,10 @@ img.clubinfo-teamlogo{
         margin-left: 2%;
         margin-right: 0%;
     }
+    .team-select{
+        margin-left:1em;
+    }
+
 }
 
 /*admin panel*/
@@ -149,4 +172,7 @@ img.select-teamlogo{
 .admin-table-ovf{
     max-width: 100px;
     overflow: hidden;
+}
+.matchmaker-teamname{
+    text-align: center;
 }
