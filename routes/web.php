@@ -32,3 +32,4 @@ Route::get('/admin/player/{clubcode}', 'thaileaguecontroller@viewplayer');
 Route::post('/admin/playeradding', 'thaileaguecontroller@playeradd');
 Route::get('/admin/allmatch', 'thaileaguecontroller@adminallmatch');
 Route::get('/admin/matchmaking/{matchweek}', 'thaileaguecontroller@matchmaker');
+Route::post('/admin/matchmaking2', 'thaileaguecontroller@matchmaker2');

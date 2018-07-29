@@ -139,6 +139,10 @@ img.admin-teamlogo{
     height: 70px;
     width:70px;
 }
+img.select-teamlogo{
+    height: 40px;
+    width:40px;
+}
 .admin-badge{
     font-size: 16px;
 }

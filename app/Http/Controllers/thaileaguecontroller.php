@@ -50,7 +50,7 @@ class thaileaguecontroller extends Controller {
     }
     
 
-    //ทุกทีมของไทยลีกในหน้าเว็บของ Admin
+    //All team Thaileague (Admin Front Page)
     public function adminteam(){
         $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
         return view("admin.allteam")
@@ -160,6 +160,34 @@ class thaileaguecontroller extends Controller {
             $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
             return view("admin.matchmaker1")
             ->with('club',$team)
-            ->with('matchweek',$matchweek);
+            ->with('matchweek',$matchweek)
+            ->with('errormessage','');
+            
+        }
+
+        public function matchmaker2(Request $request){
+            //recieve data in form
+            
+            $matchweek = $request->input('matchweek');
+            $hometeam=$request->input('hometeam');
+            $awayteam=$request->input('awayteam');
+            //If the Same Team
+            if($hometeam == $awayteam ){
+                $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
+                return view("admin.matchmaker1")
+                ->with('club',$team)
+                ->with('matchweek',$matchweek)
+                ->with('errormessage','คุณใส่ทีมซ้ำกันมา กรุณาเลือกใส่ทีมใหม่');
+            }
+            //If Not the Same
+            else{
+                $home = DB::table('clubinfo')->where('thainame',$hometeam)->first();
+                $away = DB::table('clubinfo')->where('thainame',$awayteam)->first();
+                return view("admin.matchmaker2")
+                ->with('hometeam',$home)
+                ->with('awayteam',$away)
+                ->with('matchweek',$matchweek);
+            }
+
         }
 }

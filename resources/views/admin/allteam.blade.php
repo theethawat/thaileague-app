@@ -3,7 +3,7 @@
 <div class="container">
     <br>
     @guest
-    <h6 class="kanitlight"> คุณไม่มีสิทธิในการใช้งานส่วนนี้ กรุณา<a href="url('login')">ล็อกอิน</a></h6>
+    <h6 class="kanitlight"> คุณไม่มีสิทธิในการใช้งานส่วนนี้ กรุณา<a href="{{url('login')}}">ล็อกอิน</a></h6>
     @else
     <h4 class="kanit">ทีมทั้งหมด
         <a href="../teamupdate" ><button id="addteam" class="btn btn-success kanitlight" disabled  data-toggle="tooltip" title="จะเปิดระบบเมื่อสิ้นสุดฤดูกาล" >เพิ่มทีม</button></a> 
