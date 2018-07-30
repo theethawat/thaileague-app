@@ -190,4 +190,176 @@ class thaileaguecontroller extends Controller {
             }
 
         }
+
+        public function matchmaker3(Request $request){
+             //recieve data in form
+             $matchweek = $request->input('matchweek');
+             $hometeam = $request->input('hometeam');
+             $awayteam = $request->input('awayteam');
+             $homecode = $request->input('hometeam-code');
+             $awaycode = $request->input('awayteam-code');
+             $matchinfo = $request->input('matchinfo');
+             $stadium = $request->input('stadium');
+             $matchdate = $request->input('date');
+             $matchtime = $request->input('time');
+             $ticketprice = $request->input('lowestticket');
+            
+             if($matchinfo==NULL)
+             {
+                 DB::table("matchset")->insert(
+                ['matchweek'=>$matchweek,
+                'hometeam'=>$hometeam,
+                'awayteam'=>$awayteam,
+                'homecode'=>$homecode,
+                'awaycode'=>$awaycode,
+                'stadium'=>$stadium,
+                'status'=>'prematch',
+                'ticketlessprice'=>$ticketprice,
+                'time'=>$matchtime,
+                'date'=>$matchdate]
+            );
+             }
+
+             else
+             {
+                 DB::table("matchset")->insert(
+                ['matchweek'=>$matchweek,
+                'hometeam'=>$hometeam,
+                'awayteam'=>$awayteam,
+                'homecode'=>$homecode,
+                'awaycode'=>$awaycode,
+                'stadium'=>$stadium,
+                'matchcomment'=>$matchinfo,
+                'status'=>'prematch',
+                'ticketlessprice'=>$ticketprice,
+                'time'=>$matchtime,
+                'date'=>$matchdate]
+            );
+             }
+        
+             //Find Match ID
+             $thismatch = DB::table('matchset')->where([
+                ['homecode', $homecode],
+                ['awaycode', $awaycode]
+            ])->first();
+
+             $matchid=$thismatch->id;
+
+             //Ticket
+             $ticketprovide = $request->input('ticketprovide');
+            if($ticketprovide!=NULL)
+            {
+                $ticketlink = $request->input('ticketurl');
+
+                if($ticketlink!=NULL){
+                    DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['ticketprovide' => $ticketprovide,
+                    'ticketlink' => $ticketlink]);
+                }
+
+                else{
+                    DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['ticketprovide' => $ticketprovide]);
+                }
+            }
+
+            //Broadcast
+            $free = $request->input('freebroadcast');
+            $sd = $request->input('sdbroadcast');
+            $hd = $request->input('hdbroadcast');
+            if($free !=NULL)
+            {
+                DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['broadcastingfree' => $free]);
+            }
+
+            if($sd !=NULL)
+            {
+                DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['broadcastingsd' => $sd]);
+            }
+
+            if($hd !=NULL)
+            {
+                DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['broadcastinghd' => $hd]);
+            }
+
+            return Redirect::to('/admin/allmatch');
+        }
+
+        //Match Info Adding
+        public function addobjectinfo($object,$id){
+            $matchinfo = DB::table('matchset')->where('id',$id)->first();
+            if($object=="ticket"){
+                return view('admin.ticketadd')
+                ->with('match',$matchinfo);
+            }
+            if($object=="referee"){
+                return view('admin.refereeadd')
+                ->with('match',$matchinfo);
+            }
+            
+        }
+
+        public function activeticket(Request $request){
+            //Find ID
+            $matchid = $request->input('matchid');
+             //Ticket
+            $ticketprovide = $request->input('ticketprovide');
+            if($ticketprovide!=NULL)
+            {
+                $ticketlink = $request->input('ticketurl');
+
+                if($ticketlink!=NULL){
+                    DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['ticketprovide' => $ticketprovide,
+                    'ticketlink' => $ticketlink]);
+                }
+
+                else{
+                    DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['ticketprovide' => $ticketprovide]);
+                }
+            }
+            return Redirect::to('/admin/allmatch');
+        }
+
+        public function activereferee(Request $request){
+            //Find ID
+            $matchid = $request->input('matchid');
+             //Referee
+            $ref1 = $request->input('referee1');
+            $ref2 = $request->input('referee2');
+            $ref3 = $request->input('referee3');
+            $ref4 = $request->input('referee4');
+            $ref5 = $request->input('referee5');
+
+            DB::table('matchset')
+            ->where('id', $matchid)
+            ->update(['referee1' => $ref1,
+            'referee2' => $ref2,
+            'referee3' => $ref3]);
+
+            if($ref4 !=NULL){
+                DB::table('matchset')
+                ->where('id', $matchid)
+                ->update(['referee4' => $ref4]);
+            }
+
+            if($ref5 !=NULL){
+                DB::table('matchset')
+                ->where('id', $matchid)
+                ->update(['referee5' => $ref5]);
+            }
+
+            return Redirect::to('/admin/allmatch');
+        }
 }

@@ -127,12 +127,7 @@ img.clubinfo-teamlogo{
         padding-top:0px;
     }
 }
-@media (min-width: 768px) { 
-    .team-select-flex{
-        display:-webkit-flex;
-        display:flex;
-    }
-}
+
 @media (max-width: 991.98px)  { 
     .team-select{
         padding-top:1em;
@@ -170,9 +165,10 @@ img.select-teamlogo{
     font-size: 16px;
 }
 .admin-table-ovf{
-    max-width: 100px;
+    max-width: 200px;
     overflow: hidden;
 }
+
 .matchmaker-teamname{
     text-align: center;
 }

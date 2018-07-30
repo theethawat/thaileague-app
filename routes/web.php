@@ -33,3 +33,8 @@ Route::post('/admin/playeradding', 'thaileaguecontroller@playeradd');
 Route::get('/admin/allmatch', 'thaileaguecontroller@adminallmatch');
 Route::get('/admin/matchmaking/{matchweek}', 'thaileaguecontroller@matchmaker');
 Route::post('/admin/matchmaking2', 'thaileaguecontroller@matchmaker2');
+Route::post('/admin/matchmaking3', 'thaileaguecontroller@matchmaker3');
+//Update Match Info
+Route::get('/admin/allmatch/{object}/{id}', 'thaileaguecontroller@addobjectinfo');
+Route::post('/admin/activeticket', 'thaileaguecontroller@activeticket');
+Route::post('/admin/activereferee', 'thaileaguecontroller@activereferee');
