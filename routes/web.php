@@ -24,6 +24,7 @@ Route::get('/clubinfo/{club}','thaileaguecontroller@clubinfo');
 Route::get('/index','thaileaguecontroller@index');
 Route::get('/table','thaileaguecontroller@clubranking');
 Route::get('/allclub','thaileaguecontroller@allclubshow');
+Route::get('/match/{id}','thaileaguecontroller@matchinfo');
 
 //BLACK END
 Route::get('/admin', 'HomeController@index')->name('home');
@@ -38,3 +39,4 @@ Route::post('/admin/matchmaking3', 'thaileaguecontroller@matchmaker3');
 Route::get('/admin/allmatch/{object}/{id}', 'thaileaguecontroller@addobjectinfo');
 Route::post('/admin/activeticket', 'thaileaguecontroller@activeticket');
 Route::post('/admin/activereferee', 'thaileaguecontroller@activereferee');
+Route::post('/admin/activebroadcast', 'thaileaguecontroller@activebroadcast');

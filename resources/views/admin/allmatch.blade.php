@@ -5,15 +5,52 @@
     @guest
     <p class="kanitlight"> คุณไม่มีสิทธิในการเข้าถึง โปรดล็อกอิน <a href="{{url('admin')}}"> ล็อกอิน </a></p>
     @else
-    <h5 class="kanit"> All Match </h5><hr>
+    <h5 class="kanit"> All Match <button type="button" class="btn btn-light kanitlight"data-toggle="modal" data-target="#signmeaning">
+    <i class="fas fa-info-circle"></i> คู่มือ/สัญลักษณ์</button></h5>
+    <hr>
+
+        <h6 class="kanit acenter"> Matchweek ปัจจุบัน: <span class="badge badge-primary kanitlight" style="font-size:16px;">Matchweek {{$currentmatchweek->matchweek}} </span> </h6>
+        <p class=" kanitlight acenter">
+            <small class="kanit"> เริ่มแข่งขัน {{$currentmatchweek->start}} ถึง {{$currentmatchweek->end}}</small><br>
+            <small class="kanitlight">ถ้าไม่มีแมตซ์กลางสัปดาห์ เราจะทำการอัพเดท Matchweek ทุกวันพุธหลังการแข่งขันนัดสุดสัปดาห์เสร็จสิ้น <br>
+            Matchweek ที่ {{$currentmatchweek->matchweek}} จะเริ่มตั้งแต่ {{$currentmatchweek->preferin}} ถึง {{$currentmatchweek->preferout}} </small> <br>
+            <a href="#MW{{$currentmatchweek->matchweek}}"><button class="btn btn-secondary kanitlight">ไปที่ Matchweek ปัจจุบัน</button></a>
+        <p>
+    
+    <hr>
+    <!-- Modal -->
+<div class="modal fade" id="signmeaning" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h5 class="modal-title kanit" id="exampleModalLabel">คำอธิบายสัญลักษณ์ต่างๆ</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div> 
+    <div class="modal-body">
+        <ul class="kanitlight">
+            <li><i class="fas fa-file-alt"></i> หมายถึง ดูข้อมูลทั้งหมด </li>
+            <li><i class="fas fa-edit"></i> หมายถึง แก้ไขข้อมูล </li>
+            <li> ปุ่ม Live Now หมายถึงเริ่มแมตซ์ ใช้กดเมื่อแมตซ์นั้นเริ่มขึ้น หรือ ก่อน Kick Off ประมาณ 30 นาที </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
     @php
-        $matchweekno=24;
+        $matchweekno=25;
     @endphp
 
    @while($matchweekno<=34)
-    <br>
-    <div id="MW{{$matchweekno}}">
-    <h5 class="kanit">Match Week {{$matchweekno}} <a href="./matchmaking/{{$matchweekno}}"><button class="btn btn-success kanitlight">เพิ่มแมตซ์</button> </a></h5> 
+
+ 
+
+    <div id="MW{{$matchweekno}}" class="matchweekdiv">
+    <h5 class="kanit">Match Week {{$matchweekno}} <a href="./matchmaking/{{$matchweekno}}"><button class="btn btn-success kanitlight">เพิ่มแมตซ์</button> </a> </h5> 
     <br> 
         <table class="table table-hover table-responsive">
             <thead>
@@ -26,7 +63,7 @@
                     <th scope="col" class=" kanit">เยือน</th>
                     <th scope="col" class=" kanit">ตั๋ว</th>
                     <th scope="col" class=" kanit">กรรมการ</th>
-                    <th scope="col" class=" kanit">ถ่ายทอด</th>
+                    <th scope="col" class=" kanit">ทีวี</th>
                     <th scope="col" class=" kanit">LineUp</th>
                     <th scope="col" class=" kanit">ผล</th>
                     <th scope="col" class=" kanit">ข้อมูล</th>
@@ -74,7 +111,7 @@
                         </td>
                         <td class="kanitlight"> 
                             @if($match->broadcastingsd==NULL)
-                               <a href="#">Add</a>
+                               <a href="allmatch/broadcast/{{$match->id}}">Add</a>
                             @elseif($match->broadcastingsd!=NULL)
                             <i class="fas fa-check"></i>
                             @endif
@@ -88,8 +125,10 @@
                         </td>
                         <td class="kanitlight">{{$match->homescore}}-{{$match->awayscore}}</td>
                         <td class="kanitlight">
-                            <button class="btn btn-light"><i class="fas fa-file-alt"></i></button>
-                            <button class="btn btn-light"><i class="fas fa-edit"></i></button>
+                            <div class="flexdiv">
+                            <a href="allmatch/information/{{$match->id}}"><button class="btn btn-light" title="ดูข้อมูล"><i class="fas fa-file-alt"></i></button></a>
+                            <a href="allmatch/edit/{{$match->id}}"><button class="btn btn-light"  title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></button></a>
+                            </div>
                         </td>
                         <td class="kanitlight"> 
 

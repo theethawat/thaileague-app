@@ -12,6 +12,7 @@
     <script>
         $('#addteam').tooltip('show')
     </script>
+    <h6 class="kanit acenter"> Matchweek ปัจจุบัน {{$currentmatchweek->matchweek}}</h6>
     <table class="table table-hover">
         <thead>
             <tr>

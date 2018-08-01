@@ -14,8 +14,13 @@ class thaileaguecontroller extends Controller {
     public function index(){
         $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
         $teamtable = DB::table('clubinfo')->orderBy('point','DESC')->orderBy('goalpoint','DESC')->take(5)->get();
+        $matchweek=DB::table('matchweek')->where('active','1')->first();
+        $activematchweek=$matchweek->matchweek;
+        $match=DB::table('matchset')->where('matchweek',$activematchweek)->orderBy('date','ASC')->orderBy('time','ASC')->get();
         return view('frontpage.front')
         ->with('allteam',$team)
+        ->with('allmatch',$match)
+        ->with('navtheme','')
         ->with('table',$teamtable);
     }
     
@@ -27,22 +32,54 @@ class thaileaguecontroller extends Controller {
         
         $member = DB::table($clubcodetable)->orderBy('number','ASC')->get();
 
+        $thaiteamname=$team->thainame;
+
+        $match = DB::table('matchset')
+                    ->where('hometeam', $thaiteamname)
+                    ->orWhere('awayteam', $thaiteamname)
+                    ->orderBy('matchweek','ASC')
+                    ->get();
+
         return view("frontpage.clubinfo")
         ->with('club',$team)
-        ->with('player',$member);
+        ->with('player',$member)
+        ->with('navtheme','')
+        ->with('teammatch',$match);
     }
 
     public function clubranking(){
         $teamtable = DB::table('clubinfo')->orderBy('point','DESC')->orderBy('goalpoint','DESC')->get();
         return view('frontpage.table')
-        ->with('table',$teamtable);
+        ->with('table',$teamtable)
+        ->with('navtheme','');
     }
 
     public function allclubshow(){
         $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
         return view('frontpage.allclub')
+        ->with('navtheme','')
         ->with('allclub',$team);
     }
+
+    public function matchinfo($id){
+        $match=DB::table('matchset')->where('id',$id)->first();
+
+        $hometeam=$match->hometeam;
+        $awayteam=$match->awayteam;
+        $home = DB::table('clubinfo')->where('thainame',$hometeam)->first();
+        $away = DB::table('clubinfo')->where('thainame',$awayteam)->first();
+        
+        $navtheme=$match->navtheme;
+
+        return view("frontpage.matchday")
+        ->with('thismatch',$match)
+        ->with('hometeam',$home)
+        ->with('awayteam',$away)
+        ->with('navtheme',$navtheme);
+        
+    }
+
+
 
 //Backend Server
     public function adding(){
@@ -53,10 +90,13 @@ class thaileaguecontroller extends Controller {
     //All team Thaileague (Admin Front Page)
     public function adminteam(){
         $team = DB::table('clubinfo')->orderBy('id','ASC')->get();
+        $matchweek = DB::table('matchweek')->where('active','1')->first();
         return view("admin.allteam")
-        ->with('allteam',$team);
+        ->with('allteam',$team)
+        ->with('currentmatchweek',$matchweek);
     }
 
+ 
     
 
 
@@ -147,13 +187,15 @@ class thaileaguecontroller extends Controller {
                 'position'=>$position,
                 'photo'=>$fileurl1]
             );
-            return Redirect::to('/admin/allteam');
+            return Redirect::to('/admin/player/'.$clubcode);
           }
 
         public function adminallmatch(){
-            $match = DB::table("matchset")->orderBy('matchweek','ASC')->get();
+            $match = DB::table("matchset")->orderBy('matchweek','ASC')->orderBy('date','ASC')->orderBy('time','ASC')->get();
+            $matchweek = DB::table('matchweek')->where('active','1')->first();
             return view("admin.allmatch")
-            ->with('matchshow',$match);
+            ->with('matchshow',$match)
+            ->with('currentmatchweek',$matchweek);
         }
 
         public function matchmaker($matchweek){
@@ -198,6 +240,8 @@ class thaileaguecontroller extends Controller {
              $awayteam = $request->input('awayteam');
              $homecode = $request->input('hometeam-code');
              $awaycode = $request->input('awayteam-code');
+             $homelogo = $request->input('hometeam-logo');
+             $awaylogo = $request->input('awayteam-logo');
              $matchinfo = $request->input('matchinfo');
              $stadium = $request->input('stadium');
              $matchdate = $request->input('date');
@@ -213,6 +257,8 @@ class thaileaguecontroller extends Controller {
                 'homecode'=>$homecode,
                 'awaycode'=>$awaycode,
                 'stadium'=>$stadium,
+                'hometeamlogo'=>$homelogo,
+                'awayteamlogo'=>$awaylogo,
                 'status'=>'prematch',
                 'ticketlessprice'=>$ticketprice,
                 'time'=>$matchtime,
@@ -304,6 +350,31 @@ class thaileaguecontroller extends Controller {
                 return view('admin.refereeadd')
                 ->with('match',$matchinfo);
             }
+            if($object=="broadcast"){
+                return view('admin.broadcastadd')
+                ->with('match',$matchinfo);
+            }
+            if($object=="information"){
+                $hometeam=$matchinfo->hometeam;
+                $awayteam=$matchinfo->awayteam;
+                $home = DB::table('clubinfo')->where('thainame',$hometeam)->first();
+                $away = DB::table('clubinfo')->where('thainame',$awayteam)->first();
+                return view('admin.infoview')
+                ->with('match',$matchinfo)
+                ->with('home',$home)
+                ->with('away',$away);
+            }
+
+            if($object=="edit"){
+                $hometeam=$matchinfo->hometeam;
+                $awayteam=$matchinfo->awayteam;
+                $home = DB::table('clubinfo')->where('thainame',$hometeam)->first();
+                $away = DB::table('clubinfo')->where('thainame',$awayteam)->first();
+                return view('admin.matcheditor')
+                ->with('match',$matchinfo)
+                ->with('home',$home)
+                ->with('away',$away);
+            }
             
         }
 
@@ -360,6 +431,38 @@ class thaileaguecontroller extends Controller {
                 ->update(['referee5' => $ref5]);
             }
 
+            return Redirect::to('/admin/allmatch');
+        }
+
+        public function activebroadcast(Request $request){
+            //Find ID
+            $matchid = $request->input('matchid');
+
+            //Broadcast
+            $free = $request->input('freebroadcast');
+            $sd = $request->input('sdbroadcast');
+            $hd = $request->input('hdbroadcast');
+            if($free !=NULL)
+            {
+                DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['broadcastingfree' => $free]);
+            }
+
+            if($sd !=NULL)
+            {
+                DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['broadcastingsd' => $sd]);
+            }
+
+            if($hd !=NULL)
+            {
+                DB::table('matchset')
+                    ->where('id', $matchid)
+                    ->update(['broadcastinghd' => $hd]);
+            }
+         
             return Redirect::to('/admin/allmatch');
         }
 }

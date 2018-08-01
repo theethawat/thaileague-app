@@ -60,7 +60,7 @@
                     <input type="text" class="form-control kanitlight" name="referee4">
                 </div>
                 <div class="col-sm">
-                    <label class="kanit">ผู้ตัดสินที่ 4 (ถ้ามี)</label>
+                    <label class="kanit">ผู้ตัดสินที่ 5 (ถ้ามี)</label>
                     <input type="text" class="form-control kanitlight" name="referee5" >
                 </div>
             </div>

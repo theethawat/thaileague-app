@@ -11,6 +11,9 @@
 .text-l2{
     font-size: 20px;
 }
+.acenter{
+    text-align: center;
+}
 /*header*/
 .head-font{
     font-size: 20px;
@@ -110,6 +113,14 @@ img.clubinfo-teamlogo{
     .team-select{
         padding-top:0px;
     }
+    .matchday-hteam{
+        padding-left:2%;
+        padding-right:2%;
+    }
+    .matchday-ateam{
+        padding-left:2%;
+        padding-right:2%;
+    }
  }
 @media (max-width: 767.98px) { 
     img.fanzone-2{
@@ -126,6 +137,29 @@ img.clubinfo-teamlogo{
     .team-select{
         padding-top:0px;
     }
+    .matchday-hteam{
+        padding-left:10%;
+        padding-right:10%;
+    }
+    .matchday-ateam{
+        padding-left:10%;
+        padding-right:10%;
+    }
+}
+/*matchday page */
+img.matchday-logo{
+    height: 40px;
+    width:40px;
+}
+h6.matchday-teamname{
+    padding-top:0px;
+}
+img.ticketprovide-logo{
+    height: 100px;
+    width: 100px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media (max-width: 991.98px)  { 
@@ -149,7 +183,14 @@ img.clubinfo-teamlogo{
     .team-select{
         margin-left:1em;
     }
-
+    .matchday-hteam{
+        padding-left:20%;
+        padding-right:20%;
+    }
+    .matchday-ateam{
+        padding-left:20%;
+        padding-right:20%;
+    }
 }
 
 /*admin panel*/
@@ -171,4 +212,7 @@ img.select-teamlogo{
 
 .matchmaker-teamname{
     text-align: center;
+}
+.matchweekdiv{
+    padding-top:1em;
 }
