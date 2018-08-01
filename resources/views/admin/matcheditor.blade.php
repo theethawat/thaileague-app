@@ -37,7 +37,7 @@
     <form action="{{url('admin/matchupdate')}}" method="post">
         <input class="form-control kanitlight" name="matchweek" value="{{$match->matchweek}}" required hidden>
         <label class="kanit">Match ID</label>
-        <input class="form-control kanitlight" name="matchweek" value="{{$match->id}}" required readonly>
+        <input class="form-control kanitlight" name="id" value="{{$match->id}}" required readonly>
         <div class="row">
             <div class="col">
                 <label class="kanit">ทีมเหย้า</label>

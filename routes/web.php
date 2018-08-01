@@ -40,3 +40,4 @@ Route::get('/admin/allmatch/{object}/{id}', 'thaileaguecontroller@addobjectinfo'
 Route::post('/admin/activeticket', 'thaileaguecontroller@activeticket');
 Route::post('/admin/activereferee', 'thaileaguecontroller@activereferee');
 Route::post('/admin/activebroadcast', 'thaileaguecontroller@activebroadcast');
+Route::post('/admin/matchupdate', 'thaileaguecontroller@updatematchinfo');

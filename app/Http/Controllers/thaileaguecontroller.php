@@ -465,4 +465,131 @@ class thaileaguecontroller extends Controller {
          
             return Redirect::to('/admin/allmatch');
         }
+
+        public function updatematchinfo(Request $request){
+            //recieve data in form
+            $matchid = $request->input('id');
+            $homelogo = $request->input('hometeam-logo');
+            $awaylogo = $request->input('awayteam-logo');
+            $matchinfo = $request->input('matchinfo');
+            $stadium = $request->input('stadium');
+            $matchdate = $request->input('date');
+            $matchtime = $request->input('time');
+            $ticketprice = $request->input('lowestticket');
+           
+
+            if($matchinfo==NULL)
+            {
+                DB::table("matchset")->where('id',$matchid)->update(
+               [
+               'stadium'=>$stadium,
+               'hometeamlogo'=>$homelogo,
+               'awayteamlogo'=>$awaylogo,
+               'status'=>'prematch',
+               'ticketlessprice'=>$ticketprice,
+               'time'=>$matchtime,
+               'date'=>$matchdate]
+           );
+            }
+
+            else
+            {
+                DB::table("matchset")->where('id',$matchid)->update(
+                    [
+                    'stadium'=>$stadium,
+                    'hometeamlogo'=>$homelogo,
+                    'awayteamlogo'=>$awaylogo,
+                    'status'=>'prematch',
+                    'matchcomment'=>$matchinfo,
+                    'ticketlessprice'=>$ticketprice,
+                    'time'=>$matchtime,
+                    'date'=>$matchdate]
+           );
+            }
+       
+
+            //Ticket
+            $ticketprovide = $request->input('ticketprovide');
+           if($ticketprovide!=NULL)
+           {
+               $ticketlink = $request->input('ticketurl');
+
+               if($ticketlink!=NULL){
+                   DB::table('matchset')
+                   ->where('id', $matchid)
+                   ->update(['ticketprovide' => $ticketprovide,
+                   'ticketlink' => $ticketlink]);
+               }
+
+               else{
+                   DB::table('matchset')
+                   ->where('id', $matchid)
+                   ->update(['ticketprovide' => $ticketprovide]);
+               }
+           }
+
+           //Broadcast
+           $free = $request->input('freebroadcast');
+           $sd = $request->input('sdbroadcast');
+           $hd = $request->input('hdbroadcast');
+           if($free !=NULL)
+           {
+               DB::table('matchset')
+                   ->where('id', $matchid)
+                   ->update(['broadcastingfree' => $free]);
+           }
+
+           if($sd !=NULL)
+           {
+               DB::table('matchset')
+                   ->where('id', $matchid)
+                   ->update(['broadcastingsd' => $sd]);
+           }
+
+           if($hd !=NULL)
+           {
+               DB::table('matchset')
+                   ->where('id', $matchid)
+                   ->update(['broadcastinghd' => $hd]);
+           }
+        
+           //Referee
+           $ref1 = $request->input('referee1');
+           $ref2 = $request->input('referee2');
+           $ref3 = $request->input('referee3');
+           $ref4 = $request->input('referee4');
+           $ref5 = $request->input('referee5');
+
+           if($ref1 !=NULL){
+            DB::table('matchset')
+            ->where('id', $matchid)
+            ->update(['referee1' => $ref1]);
+        }
+
+        if($ref2 !=NULL){
+            DB::table('matchset')
+            ->where('id', $matchid)
+            ->update(['referee2' => $ref2]);
+        }
+
+        if($ref3 !=NULL){
+            DB::table('matchset')
+            ->where('id', $matchid)
+            ->update(['referee3' => $ref3]);
+        }
+
+           if($ref4 !=NULL){
+               DB::table('matchset')
+               ->where('id', $matchid)
+               ->update(['referee4' => $ref4]);
+           }
+
+           if($ref5 !=NULL){
+               DB::table('matchset')
+               ->where('id', $matchid)
+               ->update(['referee5' => $ref5]);
+           }
+
+           return Redirect::to('/admin/allmatch');
+       }
 }
