@@ -161,7 +161,26 @@ img.ticketprovide-logo{
     margin-left: auto;
     margin-right: auto;
 }
-
+img.matchday-tvshort
+{
+    height:40px;
+    width:100px;
+    margin-left:1em;
+    margin-right:1em;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+img.matchday-tvlong
+{
+    height:40px;
+    width:140px;
+    margin-left:1em;
+    margin-right:1em;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
 @media (max-width: 991.98px)  { 
     .team-select{
         padding-top:1em;

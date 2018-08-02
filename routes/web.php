@@ -17,9 +17,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/teamupdate', 'thaileaguecontroller@adding');
-Route::post('/addteam', 'thaileaguecontroller@teamadd');
-Route::get('/admin/allteam', 'thaileaguecontroller@adminteam');
+
 Route::get('/clubinfo/{club}','thaileaguecontroller@clubinfo');
 Route::get('/index','thaileaguecontroller@index');
 Route::get('/table','thaileaguecontroller@clubranking');
@@ -27,17 +25,22 @@ Route::get('/allclub','thaileaguecontroller@allclubshow');
 Route::get('/match/{id}','thaileaguecontroller@matchinfo');
 
 //BLACK END
+Route::get('/teamupdate', 'ThaileagueAdminController@adding');
+Route::post('/addteam', 'ThaileagueAdminController@teamadd');
+Route::get('/admin/allteam', 'ThaileagueAdminController@adminteam');
+
 Route::get('/admin', 'HomeController@index')->name('home');
-Route::get('/admin/addplayer/{clubcode}', 'thaileaguecontroller@addplayer');
-Route::get('/admin/player/{clubcode}', 'thaileaguecontroller@viewplayer');
-Route::post('/admin/playeradding', 'thaileaguecontroller@playeradd');
-Route::get('/admin/allmatch', 'thaileaguecontroller@adminallmatch');
-Route::get('/admin/matchmaking/{matchweek}', 'thaileaguecontroller@matchmaker');
-Route::post('/admin/matchmaking2', 'thaileaguecontroller@matchmaker2');
-Route::post('/admin/matchmaking3', 'thaileaguecontroller@matchmaker3');
+Route::get('/admin/addplayer/{clubcode}', 'ThaileagueAdminController@addplayer');
+Route::get('/admin/player/{clubcode}', 'ThaileagueAdminController@viewplayer');
+Route::post('/admin/playeradding', 'ThaileagueAdminController@playeradd');
+Route::get('/admin/allmatch', 'ThaileagueAdminController@adminallmatch');
+Route::get('/admin/matchmaking/{matchweek}', 'ThaileagueAdminController@matchmaker');
+Route::post('/admin/matchmaking2', 'ThaileagueAdminController@matchmaker2');
+Route::post('/admin/matchmaking3', 'ThaileagueAdminController@matchmaker3');
 //Update Match Info
-Route::get('/admin/allmatch/{object}/{id}', 'thaileaguecontroller@addobjectinfo');
-Route::post('/admin/activeticket', 'thaileaguecontroller@activeticket');
-Route::post('/admin/activereferee', 'thaileaguecontroller@activereferee');
-Route::post('/admin/activebroadcast', 'thaileaguecontroller@activebroadcast');
-Route::post('/admin/matchupdate', 'thaileaguecontroller@updatematchinfo');
+Route::get('/admin/allmatch/{object}/{id}', 'ThaileagueAdminController@addobjectinfo');
+Route::post('/admin/activeticket', 'ThaileagueAdminController@activeticket');
+Route::post('/admin/activereferee', 'ThaileagueAdminController@activereferee');
+Route::post('/admin/activebroadcast', 'ThaileagueAdminController@activebroadcast');
+Route::post('/admin/matchupdate', 'ThaileagueAdminController@updatematchinfo');
+Route::get('/admin/lineupmake/{team}/{id}', 'ThaileagueAdminController@lineupmaker');

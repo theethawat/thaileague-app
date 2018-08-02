@@ -64,6 +64,23 @@
 
             <h6 class="kanit a center"> สนามแข่งขัน <span class="kanitlight"> {{$thismatch->stadium}} </span></h6>
             <h6 class="kanit acenter">Matchweek <span class="kanitlight">{{$thismatch->matchweek}} </span>  วันที่ <span class="kanitlight">{{$thismatch->date}} </span> Kick-Off <span class="kanitlight">{{$thismatch->time}}</span> </h6>
+            <h6 class="acenter kanit">ถ่ายทอดสด</h6>
+            <div class="flexdiv" >
+                @if($thismatch->broadcastingfree=="true4u")
+                <img src="{{URL::asset('photo/truevision/true4u.png')}}" class="matchday-tvlong" alt="true4u">
+                @endif
+ 
+
+                @if($thismatch->broadcastingsd!=NULL && $thismatch->broadcastingsd!="no")
+                <img src="{{URL::asset('photo/truevision/'.$thismatch->broadcastingsd.'.png')}}" class="matchday-tvshort" alt="{{$thismatch->broadcastingsd}}">
+                @endif
+ 
+
+                @if($thismatch->broadcastinghd!=NULL && $thismatch->broadcastinghd!="no")
+                <img src="{{URL::asset('photo/truevision/'.$thismatch->broadcastinghd.'.png')}}" class="matchday-tvlong" alt="{{$thismatch->broadcastinghd}}">
+                @endif
+                
+            </div>
         </div>
     </div>
 
@@ -83,7 +100,7 @@
 
     <div id="lineuphome" class="col s12">
         <div class="container">
-            @if($thismatch->lineup=='0')
+            @if($thismatch->homelineup=='0')
             <p class="kanitlight acenter">ยังไม่มีข้อมูลตอนนี้<br>
             โปรดรอ LINEUP จะมาก่อน Match เริ่มต้นแน่นอน
             </p>
@@ -95,7 +112,7 @@
 
     <div id="lineupaway" class="col s12">
         <div class="container">
-            @if($thismatch->lineup=='0')
+            @if($thismatch->awaylineup=='0')
             <p class="kanitlight acenter">ยังไม่มีข้อมูลตอนนี้<br>
             โปรดรอ LINEUP จะมาก่อน Match เริ่มต้นแน่นอน
             </p>

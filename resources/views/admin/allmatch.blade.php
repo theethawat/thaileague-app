@@ -117,11 +117,20 @@
                             @endif
                         </td>
                         <td class="kanitlight"> 
-                            @if($match->lineup==0)
-                            <button class="btn btn-warning kanitlight">Add</button>
-                            @elseif($match->lineup==1)
-                            <button class="btn btn-success kanitlight">See</button>
+                            <div class="flexdiv">
+                            @if($match->homelineup==0)
+                            <a href="lineupmake/home/{{$match->id}} "><button class="btn btn-warning kanitlight" style="margin-right:0.25em;"><i class="fas fa-plus"></i> H</button></a>
+                            @elseif($match->homelineup==1)
+                            <button class="btn btn-success kanitlight"><i class="fas fa-check"></i> H</button>
                             @endif
+
+                            @if($match->awaylineup==0)
+                            <a href="lineupmake/away/{{$match->id}} "><button class="btn btn-warning kanitlight"><i class="fas fa-plus"></i> A</button></a>
+                            @elseif($match->awaylineup==1)
+                            <button class="btn btn-danger kanitlight " style="margin-right:0.25em;"><i class="fas fa-check"></i> A</button>
+                            @endif
+
+                            </div>
                         </td>
                         <td class="kanitlight">{{$match->homescore}}-{{$match->awayscore}}</td>
                         <td class="kanitlight">
