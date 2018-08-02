@@ -520,27 +520,49 @@ class ThaileagueAdminController extends Controller {
 
        public function lineupmaker($team,$id){
            $match=DB::table("matchset")->where('id',$id)->first();
-           if($team="home"){
+           if($team=="home"){
                 $homecode=$match->homecode;
                 $hometable="member_".$homecode;
-                $homeplayer=DB::table($hometable)->orderBy('id','ASC')->get();
+
+                $goalkeeper=DB::table($hometable)->where('position','GK')->get();
+                $defender=DB::table($hometable)->where('position','DF')->get();
+                $midfielder=DB::table($hometable)->where('position','MF')->get();
+                $forwarder=DB::table($hometable)->where('position','FW')->get();
                 return view('admin.lineupmaker')
                 ->with('match',$match)
                 ->with('team',$team)
-                ->with('player',$homeplayer);
+                ->with('goalkeeper',$goalkeeper)
+                ->with('defender',$defender)
+                ->with('midfielder',$midfielder)
+                ->with('forwarder',$forwarder);
            }
 
-           if($team="away")
+           if($team=="away")
            {
                 $awaycode=$match->awaycode;
                 $awaytable="member_".$awaycode;
-                $awayplayer=DB::table($awaytable)->orderBy('id','ASC')->get();
+
+                $goalkeeper=DB::table($awaytable)->where('position','GK')->get();
+                $defender=DB::table($awaytable)->where('position','DF')->get();
+                $midfielder=DB::table($awaytable)->where('position','MF')->get();
+                $forwarder=DB::table($awaytable)->where('position','FW')->get();
                 return view('admin.lineupmaker')
                 ->with('match',$match)
                 ->with('team',$team)
-                ->with('player',$awayplayer);
+                ->with('goalkeeper',$goalkeeper)
+                ->with('defender',$defender)
+                ->with('midfielder',$midfielder)
+                ->with('forwarder',$forwarder);
            }
 
+       }
+
+       public function lineupactive(Request $request){
+           //recieve data in form
+           $defender = $request->input('defender');
+           echo $defender[0];
+           echo $defender[1];
+           echo $defender[2];
        }
 
 }

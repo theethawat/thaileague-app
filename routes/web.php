@@ -44,3 +44,4 @@ Route::post('/admin/activereferee', 'ThaileagueAdminController@activereferee');
 Route::post('/admin/activebroadcast', 'ThaileagueAdminController@activebroadcast');
 Route::post('/admin/matchupdate', 'ThaileagueAdminController@updatematchinfo');
 Route::get('/admin/lineupmake/{team}/{id}', 'ThaileagueAdminController@lineupmaker');
+Route::post('/admin/activelineup', 'ThaileagueAdminController@lineupactive');

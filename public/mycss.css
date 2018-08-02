@@ -235,3 +235,11 @@ img.select-teamlogo{
 .matchweekdiv{
     padding-top:1em;
 }
+.lineup-photo{
+    height:100px;
+    width:100px;
+}
+.lineup-playerinfo{
+    margin-left:0.5em;
+    margin-right: 0.5em;
+}
