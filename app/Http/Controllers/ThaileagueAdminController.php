@@ -537,11 +537,10 @@ class ThaileagueAdminController extends Controller {
                 ->with('forwarder',$forwarder);
            }
 
-           if($team=="away")
+           else if($team=="away")
            {
                 $awaycode=$match->awaycode;
                 $awaytable="member_".$awaycode;
-
                 $goalkeeper=DB::table($awaytable)->where('position','GK')->get();
                 $defender=DB::table($awaytable)->where('position','DF')->get();
                 $midfielder=DB::table($awaytable)->where('position','MF')->get();
@@ -554,15 +553,173 @@ class ThaileagueAdminController extends Controller {
                 ->with('midfielder',$midfielder)
                 ->with('forwarder',$forwarder);
            }
-
+           
        }
 
        public function lineupactive(Request $request){
            //recieve data in form
+           $amoutdf=$request->input('df-amount');
+           $amoutmf=$request->input('mf-amount');
+           $amoutfw=$request->input('fw-amount');
+
            $defender = $request->input('defender');
-           echo $defender[0];
-           echo $defender[1];
-           echo $defender[2];
+           $midfielder = $request->input('midfielder');
+           $forwarder = $request->input('forwarder');
+           $goalkeeper = $request->input('goalkeeper');
+
+           $teamcode = $request->input('team-code');
+           $teamstatus = $request->input('home/away');
+           $matchid = $request->input('matchid');
+
+            if($teamstatus=="home"){
+                $type=0;
+            }
+            if($teamstatus=="away"){
+                $type=1;
+            }
+            $num=2;
+            for($i=0;$i<$amoutdf;$i++){
+                $player[$num]=$defender[$i];
+                $num++;
+            }
+            for($i=0;$i<$amoutmf;$i++){
+                $player[$num]=$midfielder[$i];
+                $num++;
+            }
+            for($i=0;$i<$amoutfw;$i++){
+                $player[$num]=$forwarder[$i];
+                $num++;
+            }
+
+           DB::table("lineup")->insert(
+            ['matchid'=>$matchid,
+            'amoutdf'=>$amoutdf,
+            'amoutmf'=>$amoutmf,
+            'amoutfw'=>$amoutfw,
+            'teamcode'=>$teamcode,
+            'type'=>$type,
+            'player1'=>$goalkeeper,
+            'player2'=>$player[2],
+            'player3'=>$player[3],
+            'player4'=>$player[4],
+            'player5'=>$player[5],
+            'player6'=>$player[6],
+            'player7'=>$player[7],
+            'player8'=>$player[8],
+            'player9'=>$player[9],
+            'player10'=>$player[10],
+            'player11'=>$player[11],
+            ]       
+        );
+        
+        $teamtable="member_".$teamcode;
+        /*
+        $bench = DB::table($teamtable)
+                 ->whereNotIn('name', '',$goalkeeper)
+                  ->orWhere('name', '',$player[2])
+                  ->orWhere('name', '', $player[3])
+                  ->orWhere('name', '', $player[4])
+                  ->orWhere('name', '', $player[5])
+                  ->orWhere('name', '', $player[6])
+                  ->orWhere('name', '', $player[7])
+                  ->orWhere('name', '', $player[8])
+                  ->orWhere('name', '', $player[9])
+                  ->orWhere('name', '', $player[10])
+                  ->orWhere('name', '', $player[11])
+        ->get();
+        */
+        $bench = DB::table($teamtable)
+                 ->whereNotIn('name',[$goalkeeper
+                 ,$player[2]
+                 ,$player[3]
+                 ,$player[4]
+                 ,$player[5]
+                 ,$player[6]
+                 ,$player[7]
+                 ,$player[8]
+                 ,$player[9]
+                 ,$player[10]
+                 ,$player[11]])
+        ->get();
+        return view('admin.benchmaker')
+       ->with('member',$bench)
+       ->with('teamstatus',$teamstatus)
+       ->with('teamcode',$teamcode)
+       ->with('matchid',$matchid);
        }
+
+
+       public function benchactive(Request $request){
+
+        $teamcode = $request->input('teamcode');
+        $matchid = $request->input('matchid');
+
+        $lineup= DB::table('lineup')->where([
+            ['matchid',$matchid],
+            ['teamcode',$teamcode],
+        ])->orderBy('id','DESC')->first();
+        
+        $bench=$request->input('bench');
+        //$numofbench=count($bench);
+
+        $lineupid=$lineup->id;
+        $j=1;
+
+        for($i=0;$i<9;$i++){
+            if($bench[$i]){
+                $benchlineup[$j]=$bench[$i];
+            }
+            
+            else{
+                $benchlineup[$j]="";
+            }
+          $j++;      
+        }
+
+        DB::table('lineup')
+        ->where('id',$lineupid)
+        ->update(['bench1' => $benchlineup[1],
+                'bench2'=>$benchlineup[2],
+                'bench3'=>$benchlineup[3],
+                'bench4'=>$benchlineup[4],
+                'bench5'=>$benchlineup[5],
+                'bench6'=>$benchlineup[6],
+                'bench7'=>$benchlineup[7],
+                'bench8'=>$benchlineup[8],
+                'bench9'=>$benchlineup[9],    
+        ]);
+        return view("admin.confermlineup")
+        ->with('currentid',$lineupid)
+        ->with('matchid',$matchid)
+        ->with('lineupid',$lineupid)
+        ->with('teamcode',$teamcode);
+    }
+    public function lineupconferm(Request $request){
+        $teamcode = $request->input('teamcode');
+        $matchid = $request->input('matchid');
+        $lineupid = $request->input('lineupid');
+
+        DB::table('lineup')->where([
+            ['teamcode', $teamcode],
+            ['matchid', $matchid],
+            ['id','<',$lineupid]
+        ])->delete();
+
+        $maintable=DB::table('matchset')->where('id',$matchid)->first();
+        if($maintable->homecode==$teamcode){
+            DB::table('matchset')
+               ->where('id', $matchid)
+               ->update(['homelineup' => 1]);
+        }
+        if($maintable->awaycode==$teamcode){
+            DB::table('matchset')
+               ->where('id', $matchid)
+               ->update(['awaylineup' => 1]);
+        }
+        return Redirect::to('/admin/allmatch');
+    
+    }
+       
+       
 
 }

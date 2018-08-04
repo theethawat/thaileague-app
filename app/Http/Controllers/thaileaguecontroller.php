@@ -69,12 +69,64 @@ class thaileaguecontroller extends Controller {
         $home = DB::table('clubinfo')->where('thainame',$hometeam)->first();
         $away = DB::table('clubinfo')->where('thainame',$awayteam)->first();
         
+        if($match->homelineup==1)
+        {
+           $hometeamtable="member_".$match->homecode;
+           $homelineup = DB::table('lineup')->where([
+               ['matchid',$match->id],
+               ['type',0]
+           ])->first(); 
+           $hometeamtable="member_".$match->homecode;
+
+           for($i=1;$i<=11;$i++){
+               $playerrun="player".$i;
+                $homeinfo[$i]=DB::table($hometeamtable)->where('name',$homelineup->$playerrun)->first();
+            }
+            for($i=12;$i<=20;$i++){
+                $j=$i-11;
+                $benchrun="bench".$j;
+                $homeinfo[$i]=DB::table($hometeamtable)->where('name',$homelineup->$benchrun)->first();
+            }
+
+        }
+        else{
+            $homelineup="";
+            $homeinfo="";
+        }
+        
+        if($match->awaylineup==1){
+            $awaylineup = DB::table('lineup')->where([
+                ['matchid',$match->id],
+                ['type',1]
+            ])->first(); 
+            $awayteamtable="member_".$match->awaycode;
+            for($i=1;$i<=11;$i++){
+                $playerrun="player".$i;
+                 $awayinfo[$i]=DB::table($awayteamtable)->where('name',$awaylineup->$playerrun)->first();
+             }
+             for($i=12;$i<=20;$i++){
+                 $j=$i-11;
+                 $benchrun="bench".$j;
+                 $awayinfo[$i]=DB::table($awayteamtable)->where('name',$awaylineup->$benchrun)->first();
+             }
+ 
+
+        }
+        else{
+            $awaylineup="";
+            $awayinfo="";
+        }
+        
         $navtheme=$match->navtheme;
 
         return view("frontpage.matchday")
         ->with('thismatch',$match)
         ->with('hometeam',$home)
         ->with('awayteam',$away)
+        ->with('homelineup',$homelineup)
+        ->with('awaylineup',$awaylineup)
+        ->with('homeinfo',$homeinfo)
+        ->with('awayinfo',$awayinfo)
         ->with('navtheme',$navtheme);
         
     }

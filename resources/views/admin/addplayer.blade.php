@@ -38,7 +38,7 @@
 
         </div>
 
-        <label class="kanit">รูปภาพนักเตะ</label>
+        <label class="kanit">รูปภาพนักเตะ</label><small class="kanitlight">ถ้าไม่มีภาพนักเตะกับสโมสรนี้ให้หาภาพนักเตะคนนี้จาก Google โดยจะเป็นภาพในชุดใดก็ได้ ถ้าไม่มีสามารถใช้โลโก้ลีกแทนได้</small>
         <br>
         <input type="file" id="playerface" name="playerface" require>
         <br><br>

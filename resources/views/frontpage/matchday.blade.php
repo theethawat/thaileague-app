@@ -104,8 +104,89 @@
             <p class="kanitlight acenter">ยังไม่มีข้อมูลตอนนี้<br>
             โปรดรอ LINEUP จะมาก่อน Match เริ่มต้นแน่นอน
             </p>
-            @else
+        @else
+        <!--SYSTEM FOR SHOW LINEUP -->
+                <h6 class="kanit acenter">ผู้รักษาประตู</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($homeinfo[1]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber red accent-4 white-text"> {{$homeinfo[1]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$homelineup->player1}}</h6>
+                        </div>
+                    </div>       
+                </div>
+                <hr class="hr-front">
+                
+                <h6 class="kanit acenter">กองหลัง</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                @php
+                    $homepart1amout=($homelineup->amoutdf)+1;
+                    @endphp
+                @for($i=2;$i<=$homepart1amout;$i++)
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($homeinfo[$i]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber  red accent-4 white-text"> {{$homeinfo[$i]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$homeinfo[$i]->name}}</h6> 
+                        </div>
+                    </div>     
+                @endfor  
+                </div>
+                <hr class="hr-front">
+                
 
+                <h6 class="kanit acenter">กองกลาง</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                    @php
+                    $homepart2amout=($homelineup->amoutmf)+($homelineup->amoutdf)+1;
+                    $homepart2start=($homelineup->amoutdf)+2;
+                    @endphp
+                @for($i=$homepart2start;$i<=$homepart2amout;$i++)
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($homeinfo[$i]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber  red accent-4 white-text"> {{$homeinfo[$i]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$homeinfo[$i]->name}}</h6> 
+                        </div>
+                    </div>     
+                @endfor  
+                </div>
+                <hr class="hr-front">
+                
+                <h6 class="kanit acenter">กองหน้า</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                    @php
+                    $homepart3start=($homelineup->amoutdf)+($homelineup->amoutmf)+2;
+                    @endphp
+                @for($i=$homepart3start;$i<=11;$i++)
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($homeinfo[$i]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber  red accent-4 white-text"> {{$homeinfo[$i]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$homeinfo[$i]->name}}</h6> 
+                        </div>
+                    </div>     
+                @endfor  
+                
+                </div>
+                <p class="kanitlight acenter">จัดตามสถานะ GK DF MF FW เท่านั้นไม่ได้จัดตามระบบการเล่น</p>
+                <br><br>
+                <hr class="hr-front">
+                
+                 <h6 class="kanit acenter">ตัวสำรอง</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                @for($i=12;$i<=20;$i++)
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($homeinfo[$i]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber orange darken-1 white-text"> {{$homeinfo[$i]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$homeinfo[$i]->name}}</h6> 
+                        </div>
+                    </div>     
+                @endfor  
+                </div>
+            <!--END OF SYSTEM TO SHOW LINEUP -->
             @endif
         </div>
     </div>
@@ -117,6 +198,91 @@
             โปรดรอ LINEUP จะมาก่อน Match เริ่มต้นแน่นอน
             </p>
             @else
+                    <!--SYSTEM FOR SHOW LINEUP -->
+                <h6 class="kanit acenter">ผู้รักษาประตู</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($awayinfo[1]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber red accent-4 white-text"> {{$awayinfo[1]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$awaylineup->player1}}</h6>
+                        </div>
+                    </div>       
+                </div>
+                <hr class="hr-front">
+                
+                <h6 class="kanit acenter">กองหลัง</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                @php
+                    $awaypart1amout=($awaylineup->amoutdf)+1;
+                    @endphp
+                @for($i=2;$i<=$awaypart1amout;$i++)
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($awayinfo[$i]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber  red accent-4 white-text"> {{$awayinfo[$i]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$awayinfo[$i]->name}}</h6> 
+                        </div>
+                    </div>     
+                @endfor  
+                </div>
+                <hr class="hr-front">
+                
+
+                <h6 class="kanit acenter">กองกลาง</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                    @php
+                    $awaypart2amout=($awaylineup->amoutmf)+($awaylineup->amoutdf)+1;
+                    $awaypart2start=($awaylineup->amoutdf)+2;
+                    @endphp
+                @for($i=$awaypart2start;$i<=$awaypart2amout;$i++)
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($awayinfo[$i]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber  red accent-4 white-text"> {{$awayinfo[$i]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$awayinfo[$i]->name}}</h6> 
+                        </div>
+                    </div>     
+                @endfor  
+                </div>
+                <hr class="hr-front">
+                
+                <h6 class="kanit acenter">กองหน้า</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                    @php
+                    $awaypart3start=($awaylineup->amoutdf)+($awaylineup->amoutmf)+2;
+                    @endphp
+                @for($i=$awaypart3start;$i<=11;$i++)
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($awayinfo[$i]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber  red accent-4 white-text"> {{$awayinfo[$i]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$awayinfo[$i]->name}}</h6> 
+                        </div>
+                    </div>     
+                @endfor  
+                
+                </div>
+                <p class="kanitlight acenter">จัดตามสถานะ GK DF MF FW เท่านั้นไม่ได้จัดตามระบบการเล่น</p>
+                <br><br>
+                <hr class="hr-front">
+                
+                 <h6 class="kanit acenter">ตัวสำรอง</h6>
+                <div class="flexdiv2 lineup-setcenter">
+                @for($i=12;$i<=20;$i++)
+                    <div class="matchday-lineup">
+                        <img class="lineup-player picture-center" src="{{URL::asset($awayinfo[$i]->photo)}} ">
+                        <div class="flexdiv">
+                            <h6 class="kanit acenter playernumber orange darken-1 white-text"> {{$awayinfo[$i]->number}}</h6>
+                            <h6 class="kanitlight acenter lineup-playername">{{$awayinfo[$i]->name}}</h6> 
+                        </div>
+                    </div>     
+                @endfor  
+                </div>
+
+
+
+
 
             @endif
         </div>

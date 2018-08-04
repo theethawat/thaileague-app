@@ -9,9 +9,9 @@
         <h5 class="kanit acenter text-primary"> {{$match->hometeam}} VS {{$match->awayteam}} </h5>
         <h6 class="kanit acenter"> เลือกที่จะสร้าง LINEUP ทีม {{$team}} 
 
-        @if($team="home")
+        @if($team=="home")
             {{$match->hometeam}}
-        @elseif($team="away")
+        @else
             {{$match->awayteam}}
         @endif 
 
@@ -19,9 +19,13 @@
         $teamcode=$team."code";
         @endphp
 
-        </h6> <hr>
+        </h6> 
+        <p class="kanitlight">ถ้าไม่มีนักเตะอยู่ในระบบกรุณาไปเพิ่มนักเตะ <b class="text-info">แล้วคลิกที่เพิ่มไลน์อัพอีกครั้ง</b> แต่บางทีนักเตะอาจจะไม่ได้อยู่ตามตำแหน่ง เช่น DF แต่ไปอยู่ MF ขอออัยในความไม่สะดวกครับ <a href="{{url('admin/addplayer/'.$match->$teamcode)}} "><button class="btn btn-info kanitlight">เพิ่มนักเตะของสโมสรนี้</button></a></p>
+        <hr>
         <form action="{{url('admin/activelineup')}}" method="post">
-            <input type="text" class="form-control kanitlight" name="team-code" value="{{$match->$teamcode}}" hidden>
+            <input type="text" class="form-control kanitlight" name="matchid" value="{{$match->id}}" hidden>
+            <label class="kanit">Team Code</label>
+            <input type="text" class="form-control kanitlight" name="team-code" value="{{$match->$teamcode}}" readonly>
             <input type="text" class="form-control kanitlight" name="home/away" value="{{$team}}" hidden>
             <h6 class="kanit">ใส่จำนวนนักเตะในแต่ละตำแหน่งในสนาม</h6>
             <small class="kanitlight">ข้อให้อ้างอิงข้อมูลจากและนับจำนวนตำแหน่ง <b class="text-danger">ตามใบประกบคู่ของไทยลีกเท่านั้น</b> เรายังไม่พร้อมสำหรับระบบระบุระบบการเล่นในแต่ละแมตซ์</small>
@@ -100,7 +104,7 @@
                 </div>
                 <hr>
                 <label class="kanit">กองหลัง</label>
-                    <p class="kanitlight" id="df-describe">กรุณาเลือกตามจำนวนที่ท่านตั้งเอาไว้ <b class="text-danger">ถ้าต้องการเปลี่ยนระบบการเล่นกรุณา Refresh หน้าใหม่</b></p>
+                    <p class="kanitlight" id="df-describe">กรุณาเลือกตามจำนวนที่ท่านตั้งเอาไว้ <b class="text-danger">ถ้าเจอปัญหากรุณากด Refresh 1 ครั้ง </b><b class="text-success"> ถ้ามีการเลือกอยู่แล้วในจำนวนที่ต้องการแต่ระบบไม่ดำเนินการต่อให้ติ๊กออกแล้วติ๊กใหม่</b></p>
                     <div class="flexdiv2">
                         @php
                          $j=1;
@@ -132,7 +136,7 @@
                             }
                             if ($('.functioncb1:checked').length > down) {
                                     $(this).prop('checked', false);
-                                    alert("ใส่ได้แค่ "+down+" คน เท่านั้น");
+                                    alert("ใส่ได้แค่ "+down+" คน เท่านั้น ถ้าระบบมีปัญหากรุณา Refresh ใหม่ ขออภัยจริงๆ ครับ");
                                 }
                             if ($('.functioncb1:checked').length == down){
                                 document.getElementById("df-describe").innerHTML="ท่านใส่ครบแล้ว สามารถใส่ส่วนถัดไปได้";
@@ -146,7 +150,7 @@
             </div>
             <div id="nextphase2" style="display:none;">
             <label class="kanit">กองกลาง</label>
-                    <p class="kanitlight" id="mf-describe">กรุณาเลือกตามจำนวนที่ท่านตั้งเอาไว้ <b class="text-danger">ถ้าต้องการเปลี่ยนระบบการเล่นกรุณา Refresh หน้าใหม่</b></p>
+                    <p class="kanitlight" id="mf-describe">กรุณาเลือกตามจำนวนที่ท่านตั้งเอาไว้ <b class="text-danger">ถ้าเจอปัญหากรุณากด Refresh 1 ครั้ง </b><b class="text-success"> ถ้ามีการเลือกอยู่แล้วในจำนวนที่ต้องการแต่ระบบไม่ดำเนินการต่อให้ติ๊กออกแล้วติ๊กใหม่</b></p>
                     <div class="flexdiv2">
                         @php
                          $k=1;
@@ -178,7 +182,7 @@
                             }
                             if ($('.functioncb2:checked').length > mid) {
                                     $(this).prop('checked', false);
-                                    alert("ใส่ได้แค่ "+mid+" คน เท่านั้น");
+                                    alert("ใส่ได้แค่ "+mid+" คน เท่านั้น ถ้าระบบมีปัญหากรุณา Refresh ใหม่ ขออภัยจริงๆ ครับ");
                                 }
                             if ($('.functioncb2:checked').length == mid){
                                 document.getElementById("mf-describe").innerHTML="ท่านใส่ครบแล้ว สามารถใส่ส่วนถัดไปได้";
@@ -194,7 +198,7 @@
 
             <div id="nextphase3" style="display:none;">
             <label class="kanit">กองหน้า</label>
-                    <p class="kanitlight" id="fw-describe">กรุณาเลือกตามจำนวนที่ท่านตั้งเอาไว้ <b class="text-danger">ถ้าต้องการเปลี่ยนระบบการเล่นกรุณา Refresh หน้าใหม่</b></p>
+                    <p class="kanitlight" id="fw-describe">กรุณาเลือกตามจำนวนที่ท่านตั้งเอาไว้ <b class="text-danger">ถ้าเจอปัญหากรุณากด Refresh 1 ครั้ง </b><b class="text-success"> ถ้ามีการเลือกอยู่แล้วในจำนวนที่ต้องการแต่ระบบไม่ดำเนินการต่อให้ติ๊กออกแล้วติ๊กใหม่</b></p>
                     <div class="flexdiv2">
                         @php
                          $m=1;
@@ -226,7 +230,7 @@
                             }
                             if ($('.functioncb3:checked').length > forw) {
                                     $(this).prop('checked', false);
-                                    alert("ใส่ได้แค่ "+forw+" คน เท่านั้น");
+                                    alert("ใส่ได้แค่ "+forw+" คน เท่านั้น ถ้าระบบมีปัญหากรุณา Refresh ใหม่ ขออภัยจริงๆ ครับ");
                                 }
                             if ($('.functioncb3:checked').length == forw){
                                 document.getElementById("fw-describe").innerHTML="ท่านใส่ครบแล้ว สามารถใส่ส่วนถัดไปได้";

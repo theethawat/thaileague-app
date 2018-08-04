@@ -181,6 +181,38 @@ img.matchday-tvlong
     margin-left: auto; 
     margin-right: auto;
 }
+.lineup-player{
+    height:40px;
+    width:40px;
+}
+.picture-center{
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+h6.playernumber{
+    width:20px;
+    height: 20px;
+    margin-left: auto; 
+    margin-right: auto;
+    border-radius: 20px;
+    font-size: 14px;
+}
+.lineup-playername{
+    width:50px;
+    overflow: hidden;
+    font-size: 12px;
+}
+.matchday-lineup
+{
+    margin-left:0.25em;
+    margin-right:0.25em;
+    margin-top:0.25em;
+}
+.lineup-setcenter{
+    justify-content:center;
+}
+
 @media (max-width: 991.98px)  { 
     .team-select{
         padding-top:1em;
@@ -210,6 +242,31 @@ img.matchday-tvlong
         padding-left:20%;
         padding-right:20%;
     }
+    .lineup-player{
+        height:70px;
+        width:70px;
+    }
+    h6.playernumber{
+        width:40px;
+        height: 40px;
+        margin-left: auto; 
+        margin-right: 0.25em;
+        border-radius: 20px;
+        font-size: 18px;
+        padding-top:0.5em;
+    }
+    .lineup-playername{
+        width:70px;
+        overflow: hidden;
+        font-size: 16px;
+    }
+    .matchday-lineup
+    {
+    margin-left:0.5em;
+    margin-right:0.5em;
+    margin-top:0.25em;
+    }
+  
 }
 
 /*admin panel*/
