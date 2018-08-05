@@ -118,11 +118,12 @@ class thaileaguecontroller extends Controller {
         }
         
         $navtheme=$match->navtheme;
-
+        $matchaction=DB::table('matchevent')->where('matchid',$match->id)->orderBy('id','DESC')->get();
         return view("frontpage.matchday")
         ->with('thismatch',$match)
         ->with('hometeam',$home)
         ->with('awayteam',$away)
+        ->with('action',$matchaction)
         ->with('homelineup',$homelineup)
         ->with('awaylineup',$awaylineup)
         ->with('homeinfo',$homeinfo)

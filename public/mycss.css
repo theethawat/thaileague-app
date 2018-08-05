@@ -300,3 +300,21 @@ img.select-teamlogo{
     margin-left:0.5em;
     margin-right: 0.5em;
 }
+.admin-teamlineup
+{
+    margin-top:0.25em;
+    margin-bottom: 0.25em;
+}
+.admin-warroom-text
+{
+   padding-top:1em;
+   margin-left:1em;
+}
+.warroom-btn
+{
+    height: 30px;
+    padding-top:0.1em;
+    font-size: 14px;
+    padding-left:0.2em;
+    padding-right: 0.2em;
+}

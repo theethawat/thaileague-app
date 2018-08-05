@@ -41,6 +41,9 @@
         <li class="tab"><a href="#lineuphome">Lineup ทีมเหย้า</a></li>
         <li class="tab"><a href="#lineupaway">Lineup ทีมเยือน</a></li>
         <li class="tab "><a href="#ticket">ตั๋วเข้าชม</a></li>
+        @if($thismatch->broadcastingfree=="true4u")
+        <li class="tab "><a href="#true4u">True4U</a></li>
+        @endif
         <li class="tab"><a href="#mom">Man of The Match</a></li>
         <li class="tab"><a href="#highlight">ไฮไลต์</a></li>
       </ul>
@@ -92,7 +95,37 @@
             พบกันเวลา {{$thismatch->time}} วันที่ {{$thismatch->date}}
             </p>
             @else
-
+            <h6 class="kanit acenter">อัพเดทความเคลื่อนไหวล่าสุด</h6>
+                    <table class="table table-hover">
+                        <thead>
+                            
+                        </thead>
+                        <tbody>
+                            @foreach($action as $act)
+                            <tr class="kanitlight">
+                                <td scope="row">{{$act->min}} </td>
+                                <td>
+                                @if($act->type=="kickoff")
+                                <i class="fab fa-telegram-plane"></i>
+                                @elseif($act->type=="yc")
+                                <i class="fas fa-portrait" style="color:orange;"></i>
+                                @elseif($act->type=="rc")
+                                <i class="fas fa-portrait" style="color:red;"></i>
+                                @elseif($act->type=="goal")
+                                <i class="fas fa-futbol"></i>
+                                @elseif($act->type=="owngoal")
+                                <i class="fas fa-futbol"></i>
+                                @elseif($act->type=="sub")
+                                <i class="fas fa-long-arrow-alt-up" style="color:green;"></i><i class="fas fa-long-arrow-alt-down" style="color:red;"></i>
+                                @else
+                                <i class="fas fa-comment"></i>
+                                @endif
+                                 </td>
+                                <td>{{$act->event}} </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
             @endif
         </div>
     </div>
@@ -370,6 +403,20 @@
             @endif
         </div>
     </div>
+
+     @if($thismatch->broadcastingfree=="true4u")
+        <div id="true4u" >
+            <script>
+                $(document).ready(function(){
+                    $("iframe").scroll(function(){
+                        $("#textabovetrue4u").hide();
+                    });
+                });
+            </script>
+            <p class="kanit acenter" id="textabovetrue4u">กดที่ Logo True4U 1 ครั้งเพื่อจะให้ดูได้</p> 
+            <iframe src="http://true4u.truelife.com/"  height="500px" width="100%"></iframe> 
+        </div>
+    @endif
 
 
 

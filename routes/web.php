@@ -47,3 +47,13 @@ Route::get('/admin/lineupmake/{team}/{id}', 'ThaileagueAdminController@lineupmak
 Route::post('/admin/activelineup', 'ThaileagueAdminController@lineupactive');
 Route::post('/admin/activebench', 'ThaileagueAdminController@benchactive');
 Route::post('/admin/activeconfermlineup', 'ThaileagueAdminController@lineupconferm');
+//LIVE MATCH PART
+Route::get('/admin/matchactive/{id}','ThaileagueAdminController@matchliveactive');
+Route::get('/admin/warroom/{id}','ThaileagueAdminController@warroomset');
+Route::post('admin/warroom/sub','ThaileagueAdminController@substitution');
+Route::post('admin/warroom/sub','ThaileagueAdminController@substitution');
+Route::get('admin/warroom/yellowcard/{id}/{team}/{player}','ThaileagueAdminController@yellowcard');
+Route::get('admin/warroom/redcard/{id}/{team}/{player}','ThaileagueAdminController@redcard');
+Route::get('admin/warroom/goal/{id}/{team}/{player}/{code}','ThaileagueAdminController@goal');
+Route::get('admin/warroom/owngoal/{id}/{team}/{player}','ThaileagueAdminController@owngoal');
+Route::post('admin/warroom/finalscore','ThaileagueAdminController@finalscore');

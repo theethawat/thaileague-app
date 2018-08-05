@@ -719,7 +719,316 @@ class ThaileagueAdminController extends Controller {
         return Redirect::to('/admin/allmatch');
     
     }
+
+    public function matchliveactive($id){
+        DB::table('matchset')
+               ->where('id', $id)
+               ->update(['status' => "live match"]);
+        return Redirect::to('/admin/allmatch');
+    }
+
+    public function warroomset($id){
+        $match=DB::table('matchset')->where('id',$id)->first();
+        $matchid=$match->id;
+        
+        if($match->homelineup==1)
+        {
+           $hometeamtable="member_".$match->homecode;
+           $homelineup = DB::table('lineup')->where([
+               ['matchid',$match->id],
+               ['type',0]
+           ])->first(); 
+           $hometeamtable="member_".$match->homecode;
+
+           for($i=1;$i<=11;$i++){
+               $playerrun="player".$i;
+                $homeinfo[$i]=DB::table($hometeamtable)->where('name',$homelineup->$playerrun)->first();
+                $allhomeinfo[$i]=DB::table($hometeamtable)->where('name',$homelineup->$playerrun)->OrderBy('id','ASC')->get();
+            }
+            for($i=12;$i<=20;$i++){
+                $j=$i-11;
+                $benchrun="bench".$j;
+                $homeinfo[$i]=DB::table($hometeamtable)->where('name',$homelineup->$benchrun)->first();
+                $allhomeinfo[$i]=DB::table($hometeamtable)->where('name',$homelineup->$playerrun)->OrderBy('id','ASC')->get();
+            }
+
+        }
+        else{
+            $homelineup="";
+            $homeinfo="";
+        }
+        
+        if($match->awaylineup==1){
+            $awaylineup = DB::table('lineup')->where([
+                ['matchid',$match->id],
+                ['type',1]
+            ])->first(); 
+            $awayteamtable="member_".$match->awaycode;
+            for($i=1;$i<=11;$i++){
+                $playerrun="player".$i;
+                 $awayinfo[$i]=DB::table($awayteamtable)->where('name',$awaylineup->$playerrun)->first();
+
+             }
+             for($i=12;$i<=20;$i++){
+                 $j=$i-11;
+                 $benchrun="bench".$j;
+                 $awayinfo[$i]=DB::table($awayteamtable)->where('name',$awaylineup->$benchrun)->first();
+                 
+             }
+ 
+        }
+        else{
+            $awaylineup="";
+            $awayinfo="";
+        }
+        
+        $action=DB::table('matchevent')->where('matchid',$match->id)->orderBy('id','DESC')->get();
+        $kickoff=DB::table('matchevent')->where('matchid',$match->id)->orderBy('id','ASC')->first();
+        return view('admin.matchwar')
+        ->with('match',$match)
+        ->with('homelineup',$homelineup)
+        ->with('homeinfo',$homeinfo)
+        ->with('awaylineup',$awaylineup)
+        ->with('awayinfo',$awayinfo)
+        ->with('action',$action)
+        ->with('kickoff',$kickoff);
+    }
+    
+    public function kickoff($id){
+        DB::table("matchevent")->insert(
+            ['matchid'=>$id,
+            'min'=>'0',
+            'type'=>'kickoff',
+            'event'=>'kickoff']       
+        );
+        return Redirect::to('/admin/warroom/'.$id);
+    }   
+
+    public function substitution(Request $request){
+            $matchid=$request->input('matchid');
+            $lineupid=$request->input('lineupid');
+            $subout=$request->input('subout');
+            $subin=$request->input('subin');
+            $team=$request->input('team');
+            $min=$request->input('min');
+            
+            $lineup=DB::table("lineup")->where('id',$lineupid)->first();
+
+            for($i=1;$i<=11;$i++){
+                $columnname="player".$i;
+                if($lineup->$columnname==$subout){
+                    $thiscolumnin=$columnname;
+                }
+            }
+
+            for($i=1;$i<=9;$i++){
+                $columnname="bench".$i;
+                if($lineup->$columnname==$subin){
+                    $thiscolumnout=$columnname;
+                }
+            }
+
+            if($lineup->sub1in==NULL){
+                DB::table("lineup")->where('id',$lineupid)->update(
+                [
+                    'sub1in'=>$subin,
+                    'sub1out'=>$subout,
+                    $thiscolumnin=>$subin,
+                    $thiscolumnout=>$subout]
+                );
+
+                DB::table("matchevent")->insert(
+                    ['matchid'=>$matchid,
+                    'min'=>$min,
+                    'type'=>'sub',
+                    'event'=>'ทีม '.$team.' ขอเปลี่ยนตัวผู้เล่น  นำ '.$subout.'ออก และนำ '.$subin.' ลงไปเล่นแทน']       
+                );
+            }
+            elseif($lineup->sub2in==NULL){
+                DB::table("lineup")->where('id',$lineupid)->update(
+                    [
+                        'sub2in'=>$subin,
+                        'sub2out'=>$subout,
+                        $thiscolumnin=>$subin,
+                        $thiscolumnout=>$subout]
+                    );
+                 DB::table("matchevent")->insert(
+                    ['matchid'=>$matchid,
+                    'min'=>$min,
+                    'type'=>'sub',
+                    'event'=>'ทีม '.$team.' ขอเปลี่ยนตัวผู้เล่น  นำ '.$subout.'ออก และนำ '.$subin.' ลงไปเล่นแทน']       
+                );
+            }
+            elseif($lineup->sub3in==NULL){
+                DB::table("lineup")->where('id',$lineupid)->update(
+                    [
+                        'sub3in'=>$subin,
+                        'sub3out'=>$subout,
+                        $thiscolumnin=>$subin,
+                        $thiscolumnout=>$subout]
+                    );
+                DB::table("matchevent")->insert(
+                        ['matchid'=>$matchid,
+                        'min'=>$min,
+                        'type'=>'sub',
+                        'event'=>'ทีม '.$team.' ขอเปลี่ยนตัวผู้เล่น  นำ '.$subout.'ออก และนำ '.$subin.' ลงไปเล่นแทน']       
+                    );
+                
+            }
+            else{
+                print "
+                <script>
+                alert('คุณเปลี่ยนครบ 3 คนแล้ว');
+                </script>
+                ";
+            }
+            return Redirect::to('/admin/warroom/'.$matchid);
+            
+    }
+
+    public function yellowcard($id,$team,$player){
+        DB::table("matchevent")->insert(
+            ['matchid'=>$id,
+            'type'=>'yc',
+            'event'=>'ทีม'.$team.' ได้รับใบเหลืองจาก '.$player]       
+        );
+        return Redirect::to('/admin/warroom/'.$id);
+    }
+
+    public function redcard($id,$team,$player){
+        DB::table("matchevent")->insert(
+            ['matchid'=>$id,
+            'type'=>'rc',
+            'event'=>'ทีม'.$team.' ได้รับใบแดงจาก '.$player]       
+        );
+        return Redirect::to('/admin/warroom/'.$id);
+    }
+
+    public function goal($id,$team,$player,$code){
+        DB::table("matchevent")->insert(
+            ['matchid'=>$id,
+            'type'=>'goal',
+            'event'=>'ทีม '.$team.' ได้ประตูจาก '.$player]       
+        );
+        $match=DB::table("matchset")->where('id',$id)->first();
+            if($match->hometeam==$team){
+                $originalscore=$match->homescore;
+                $newscore=$originalscore+1;
+                $addingcolumn="homescore";
+            }
+            if($match->awayteam==$team){
+                $originalscore=$match->awayscore;
+                $newscore=$originalscore+1;
+                $addingcolumn="awayscore";
+            }
+
+        DB::table("matchset")->where('id',$id)->update(
+            [
+                $addingcolumn=>$newscore]
+            );
+        $membertable="member_".$code;
+
+        $memberinfo=DB::table($membertable)->where('name',$player)->first();
+            $originalmembergoal=$memberinfo->goal;
+            $newmembergoal=$originalmembergoal+1;
+
+        DB::table($membertable)->where('name',$player)->update(
+            [
+                'goal'=>$newmembergoal]
+            );
+        return Redirect::to('/admin/warroom/'.$id);
+    }
+
+    public function owngoal($id,$team,$player){
+        DB::table("matchevent")->insert(
+            ['matchid'=>$id,
+            'type'=>'owngoal',
+            'event'=>'ทีม '.$team.' ได้ประตูจากการทำเข้าประตูตัวเองของ '.$player]       
+        );
+
+        $match=DB::table("matchset")->where('id',$id)->first();
+            if($match->hometeam==$team){
+                $originalscore=$match->homescore;
+                $newscore=$originalscore+1;
+                $addingcolumn="homescore";
+            }
+            if($match->awayteam==$team){
+                $originalscore=$match->awayscore;
+                $newscore=$originalscore+1;
+                $addingcolumn="awayscore";
+            }
+
+        DB::table("matchset")->where('id',$id)->update(
+            [
+                $addingcolumn=>$newscore]
+            );
        
-       
+        return Redirect::to('/admin/warroom/'.$id);
+    }
+
+    public function finalscore(Request $request){
+        $matchid=$request->input('matchid');
+        $winnerteam=$request->input('winnerteam');
+        $loserteam=$request->input('loserteam');
+        $drawteam1=$request->input('drawteam1');
+        $drawteam2=$request->input('drawteam2');
+        $winnergd=$request->input('winnergd');
+        $losergd=$request->input('losergd');
+
+        //Show the Match is Ended
+        DB::table("matchevent")->insert(
+            ['matchid'=>$matchid,
+            'type'=>'endmatch',
+            'event'=>'หมดเวลาการแข่งขัน']       
+        );
+        
+        //Set Match is Ended
+        DB::table("matchset")->where('id',$matchid)->update(
+            [
+                'status'=>'finished']
+            );
+
+        //If have a Winner Team
+        if($drawteam1==NULL && $drawteam2==NULL){
+            $winnertable=DB::table("clubinfo")->where('thainame',$winnerteam)->first();
+            $orignalwinnerteampoint=$winnertable->point;
+            $newwinnerteampoint=$orignalwinnerteampoint+3;
+            $originalwinnerteamgd=$winnertable->goalpoint;
+            $newwinnerteamgd=$originalwinnerteamgd+$winnergd;
+            DB::table("clubinfo")->where('thainame',$winnerteam)->update(
+                [
+                    'point'=>$newwinnerteampoint,
+                    'goalpoint'=>$newwinnerteamgd]
+                );
+        $losertable=DB::table("clubinfo")->where('thainame',$loserteam)->first();
+            $originalloserteamgd=$losertable->goalpoint;
+            $newloserteamgd=$originalloserteamgd+$losergd;
+            DB::table("clubinfo")->where('thainame',$loserteam)->update(
+                [
+                    'goalpoint'=>$newloserteamgd]
+                );
+        }
+        else{
+            $drawteam1table=DB::table("clubinfo")->where('thainame',$drawteam1)->first();
+            $drawteam2table=DB::table("clubinfo")->where('thainame',$drawteam2)->first();
+                $originaldrawteam1point=$drawteam1table->point;
+                $newdrawteam1point=$originaldrawteam1point+1;
+
+                $originaldrawteam2point=$drawteam2table->point;
+                $newdrawteam2point=$originaldrawteam2point+1;
+
+            DB::table("clubinfo")->where('thainame',$drawteam1)->update(
+                    [
+                        'point'=>$newdrawteam1point]
+                    );
+             DB::table("clubinfo")->where('thainame',$drawteam2)->update(
+                    [
+                        'point'=>$newdrawteam2point]
+                    );
+        }
+        return Redirect::to('/admin/allmatch');
+        
+    }
+
 
 }
