@@ -144,7 +144,21 @@
 
     <div class="content c-highlight">
         <h5 class="kanit fronttitle red-text text-accent-4"> Official Highlight</h5><hr class="hr-front">
-        <br><br><br><br><br>
+        <div class="flexdiv2">
+        @foreach($matchhighlight as $hl)
+        <div class="card highlight-c" >
+            <!-- Card Content -->
+           
+                <div class="card-image">
+                    <img class="highlight-1" src="{{URL::asset('photo/t1_bgred.png')}} ">
+                </div>
+     
+                <div class="card-action" >
+                    <a class="red-text text-accent-4 kanit "href="{{url('iframe/'.$hl->link)}}">{{$hl->hometeam}} VS {{$hl->awayteam}} </a>
+                 </div>
+            </div>
+        @endforeach
+        </div>
     </div>
 
     <div class="content c-fanzone">

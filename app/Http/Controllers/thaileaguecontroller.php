@@ -17,11 +17,13 @@ class thaileaguecontroller extends Controller {
         $matchweek=DB::table('matchweek')->where('active','1')->first();
         $activematchweek=$matchweek->matchweek;
         $match=DB::table('matchset')->where('matchweek',$activematchweek)->orderBy('date','ASC')->orderBy('time','ASC')->get();
+        $hightlight=DB::table('videohighlight')->orderBy('id',"DESC")->take(9)->get();
         return view('frontpage.front')
         ->with('allteam',$team)
         ->with('allmatch',$match)
         ->with('navtheme','')
-        ->with('table',$teamtable);
+        ->with('table',$teamtable)
+        ->with('matchhighlight',$hightlight);
     }
     
     public function clubinfo($club){
@@ -132,4 +134,7 @@ class thaileaguecontroller extends Controller {
         
     }
 
+    public function iframe($url){
+        return view('frontpage.iframe')->with('link',$url);
+    }
 }

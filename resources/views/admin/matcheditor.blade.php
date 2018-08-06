@@ -269,6 +269,14 @@
                     @endif
                 </div>
             </div>
+            @if($match->status=="finished")
+            <br>
+            <label class="kanit">Youtube  Official Highlight</label>
+            <small class="kanitlight">ขอเป็น Official Highlight จาก Youtube True Vision Official หรือ ของสโมสรเท่านั้น โดยใส่ id URL ของวีดีโอนั้นมาใส่หลัง URL นี้</small>
+            <img src="{{URL::asset('photo/youtubeguide.png')}}" style="width:400px;height:200px;display:block;margin-left:auto;margin-right:auto;">
+            <br>
+            <input type="url" class="form-control kanitlight" name="highlight" value="https://www.youtube.com/embed/" >
+            @endif
             <hr>
             <br>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">

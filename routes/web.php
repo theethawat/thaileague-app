@@ -57,3 +57,6 @@ Route::get('admin/warroom/redcard/{id}/{team}/{player}','ThaileagueAdminControll
 Route::get('admin/warroom/goal/{id}/{team}/{player}/{code}','ThaileagueAdminController@goal');
 Route::get('admin/warroom/owngoal/{id}/{team}/{player}','ThaileagueAdminController@owngoal');
 Route::post('admin/warroom/finalscore','ThaileagueAdminController@finalscore');
+
+//IFRAME
+Route::get('/iframe/{url}','thaileaguecontroller@iframe');

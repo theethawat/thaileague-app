@@ -34,6 +34,8 @@
             <li><i class="fas fa-edit"></i> หมายถึง แก้ไขข้อมูล </li>
             <li> ปุ่ม Live Now หมายถึงเริ่มแมตซ์ ใช้กดเมื่อแมตซ์นั้นเริ่มขึ้น หรือ ก่อน Kick Off ประมาณ 30 นาที </li>
             <li> ปุ่ม Match War Room จะขึ้นมาเมื่อแมตซ์อยู่ในสถานะ Live Match แล้ว ใช้ในการเข้าไปอัพเดทความเคลื่อนไหวต่างๆตลอดแมตซ์การแข่งขัน เช่นการทำประตู การเปลี่ยนตัว และอื่นๆ </li>
+            <li><i class="fas fa-file-video"></i> คือ การเพิ่มไฮไลต์แมตซ์ จะปรากฏขึ้นหลังจบแมตซ์แล้ว</li>
+            <li><i class="fas fa-trophy"></i> คือ Man of The Match จะปรากฏขึ้นหลังจบแมตซ์แล้ว</li>
         </ul>
       </div>
     </div>
@@ -145,9 +147,13 @@
                             @if ($matchstatus=="prematch")
                             <a href="matchactive/{{$match->id}}"><button class="btn btn-success kanitlignt" id="livematchbtn"data-toggle="tooltip" data-placement="bottom" title="กดปุ่มนี้ก่อนเริ่มเกม เพื่อให้ระบบรายงาน Live Match ปรากฎขึ้นมา">LIVE NOW</button></a>
                             @elseif ($matchstatus=="live match")
-                            <a href="warroom/{{$match->id}}"><button class="btn btn-danger kanitlignt">Match<br>WAR ROOM</button></a>
+                            <a href="warroom/{{$match->id}}"><button class="btn btn-danger kanitlight">Match<br>WAR ROOM</button></a>
                             @elseif ($matchstatus=="finished")
-                            Match is ended
+                                @if($match->highlight==NULL)
+                                <small>แมตซ์จบแล้วกรุณาไปเพิ่ม Highlight ที่เมนูแก้ไข</small>
+                                @else
+                                <small>แมตซ์จบแล้ว และข้อมูลทุกอย่างเรียบร้อยแล้ว</small>
+                                @endif
                             @else
                             -
                             @endif

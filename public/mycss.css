@@ -65,6 +65,12 @@ div.flexdiv3{
     width:30px;
     height: 30px;
 }
+.highlight-1{
+    height:80px;
+}
+.highlight-c{
+    width:150px;
+}
 /*clubinfopage*/
 img.stadium-photo{ /*for sometime case*/
     width:100%;

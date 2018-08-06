@@ -44,7 +44,6 @@
         @if($thismatch->broadcastingfree=="true4u")
         <li class="tab "><a href="#true4u">True4U</a></li>
         @endif
-        <li class="tab"><a href="#mom">Man of The Match</a></li>
         <li class="tab"><a href="#highlight">ไฮไลต์</a></li>
       </ul>
 </div>
@@ -384,22 +383,14 @@
     </div>
 
 
-    <div id="mom" class="col s12">
-        <div class="container">
-            @if($thismatch->manofthematch==NULL)
-            <p class="kanitlight acenter">ยังไม่มีข้อมูลตอนนี้</p>
-            @else
-
-            @endif
-        </div>
-    </div>
+   
 
      <div id="highlight" class="col s12">
         <div class="container">
-            @if($thismatch->manofthematch==NULL)
+            @if($thismatch->highlight==NULL)
             <p class="kanitlight acenter">ยังไม่มีข้อมูลตอนนี้</p>
             @else
-
+            <iframe width="100%" height="400px" src="{{$thismatch->highlight}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             @endif
         </div>
     </div>

@@ -410,7 +410,6 @@ class ThaileagueAdminController extends Controller {
                'stadium'=>$stadium,
                'hometeamlogo'=>$homelogo,
                'awayteamlogo'=>$awaylogo,
-               'status'=>'prematch',
                'ticketlessprice'=>$ticketprice,
                'time'=>$matchtime,
                'date'=>$matchdate]
@@ -424,7 +423,6 @@ class ThaileagueAdminController extends Controller {
                     'stadium'=>$stadium,
                     'hometeamlogo'=>$homelogo,
                     'awayteamlogo'=>$awaylogo,
-                    'status'=>'prematch',
                     'matchcomment'=>$matchinfo,
                     'ticketlessprice'=>$ticketprice,
                     'time'=>$matchtime,
@@ -514,7 +512,21 @@ class ThaileagueAdminController extends Controller {
                ->where('id', $matchid)
                ->update(['referee5' => $ref5]);
            }
-
+        
+        $highlight=$request->input('highlight');
+        if($highlight!=NULL){
+            DB::table('matchset')
+               ->where('id', $matchid)
+               ->update(['highlight' => $highlight]);
+           
+            $match=DB::table('matchset')->where('id',$matchid)->first();
+            DB::table('videohighlight')->insert(
+                ['matchid'=>$matchid,
+                'hometeam'=>$match->hometeam,
+                'awayteam'=>$match->awayteam,
+                'link'=>$highlight]
+            );
+        }
            return Redirect::to('/admin/allmatch');
        }
 
@@ -981,7 +993,7 @@ class ThaileagueAdminController extends Controller {
             'type'=>'endmatch',
             'event'=>'หมดเวลาการแข่งขัน']       
         );
-        
+
         //Set Match is Ended
         DB::table("matchset")->where('id',$matchid)->update(
             [
@@ -1009,6 +1021,7 @@ class ThaileagueAdminController extends Controller {
                 );
         }
         else{
+            //DRAW GAME
             $drawteam1table=DB::table("clubinfo")->where('thainame',$drawteam1)->first();
             $drawteam2table=DB::table("clubinfo")->where('thainame',$drawteam2)->first();
                 $originaldrawteam1point=$drawteam1table->point;
@@ -1028,7 +1041,5 @@ class ThaileagueAdminController extends Controller {
         }
         return Redirect::to('/admin/allmatch');
         
-    }
-
-
+    }    
 }
