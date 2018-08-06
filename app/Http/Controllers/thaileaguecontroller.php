@@ -134,7 +134,4 @@ class thaileaguecontroller extends Controller {
         
     }
 
-    public function iframe($url){
-        return view('frontpage.iframe')->with('link',$url);
-    }
 }

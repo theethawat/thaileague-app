@@ -154,7 +154,7 @@
                 </div>
      
                 <div class="card-action" >
-                    <a class="red-text text-accent-4 kanit "href="{{url('iframe/'.$hl->link)}}">{{$hl->hometeam}} VS {{$hl->awayteam}} </a>
+                    <a class="red-text text-accent-4 kanit "href="{{url($hl->link)}}">{{$hl->hometeam}} VS {{$hl->awayteam}} </a>
                  </div>
             </div>
         @endforeach

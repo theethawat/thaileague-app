@@ -49,6 +49,7 @@ Route::post('/admin/activebench', 'ThaileagueAdminController@benchactive');
 Route::post('/admin/activeconfermlineup', 'ThaileagueAdminController@lineupconferm');
 //LIVE MATCH PART
 Route::get('/admin/matchactive/{id}','ThaileagueAdminController@matchliveactive');
+Route::get('/admin/warroom/kickoff/{id}','ThaileagueAdminController@kickoff');
 Route::get('/admin/warroom/{id}','ThaileagueAdminController@warroomset');
 Route::post('admin/warroom/sub','ThaileagueAdminController@substitution');
 Route::post('admin/warroom/sub','ThaileagueAdminController@substitution');
@@ -57,6 +58,6 @@ Route::get('admin/warroom/redcard/{id}/{team}/{player}','ThaileagueAdminControll
 Route::get('admin/warroom/goal/{id}/{team}/{player}/{code}','ThaileagueAdminController@goal');
 Route::get('admin/warroom/owngoal/{id}/{team}/{player}','ThaileagueAdminController@owngoal');
 Route::post('admin/warroom/finalscore','ThaileagueAdminController@finalscore');
+Route::post('admin/warroom/com','ThaileagueAdminController@comment');
 
-//IFRAME
-Route::get('/iframe/{url}','thaileaguecontroller@iframe');
+

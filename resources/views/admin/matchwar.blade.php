@@ -109,6 +109,32 @@
                             </form>
                         </div>
                     </div>
+
+                    <p class="acenter"><button id="addmatchcomment" class="btn btn-success kanitlight">ซ่อน/แสดง ระบบใส่การบรรยายเกมเพิ่มเติม</button></p>
+                    
+                    <script>
+                        $(document).ready(function(){
+                            $("#addmatchcomment").click(function(){
+                                $("#comment").toggle();
+                            });
+                        });
+                    </script>
+                    <div class="card" id="comment" style="display:none;">
+                        <div class="card-body">
+                            <h6 class="kanit">ใส่คำบรรยายเกมส์</h6>
+                            <form action="{{url('admin/warroom/com')}}" method="post">  
+                                    <label class="kanit">Match ID</label>
+                                    <input type="text" name="matchid" value="{{$match->id}} " class="form-control kanitlight" readonly>
+                                    <label class="kanit">ใส่คำบรรยายเกมส์</label>
+                                    <input type="text" name="comment"  class="form-control kanitlight" required>
+                                    <label class="kanit">เวลา</label>
+                                    <input type="number" name="num"  class="form-control kanitlight" >
+                              
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <br><button type="submit" class="btn btn-primary kanit">ยืนยัน</button>
+                            </form>
+                        </div>
+                    </div>
                     <br>
                     <p class="acenter"><button id="endmatch" class="btn btn-danger kanitlight" data-toggle="modal" data-target="#finalscoremodal" >จบแมตซ์/หมดเวลาการแข่งขัน</button></p>
                 <hr>

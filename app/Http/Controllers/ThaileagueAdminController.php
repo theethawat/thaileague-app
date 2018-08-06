@@ -816,6 +816,29 @@ class ThaileagueAdminController extends Controller {
         return Redirect::to('/admin/warroom/'.$id);
     }   
 
+    public function comment(Request $request){
+        $id=$request->input('matchid');
+        $comment=$request->input('comment');
+        $min=$request->input('num');
+        if($min!=NULL){
+            DB::table("matchevent")->insert(
+                ['matchid'=>$id,
+                'min'=>$min,
+                'type'=>'comment',
+                'event'=>$comment]       
+            );
+        }
+        else{
+            DB::table("matchevent")->insert(
+                ['matchid'=>$id,
+                'type'=>'comment',
+                'event'=>$comment]       
+            );
+        }
+        
+        return Redirect::to('/admin/warroom/'.$id);
+    }   
+
     public function substitution(Request $request){
             $matchid=$request->input('matchid');
             $lineupid=$request->input('lineupid');
