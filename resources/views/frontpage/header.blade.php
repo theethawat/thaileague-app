@@ -14,7 +14,7 @@
       </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i id="menu" class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down kanit">
-        <li><a href="sass.html">แมตซ์การแข่งขัน</a></li>
+        <li><a href="{{url('match')}}">แมตซ์การแข่งขัน</a></li>
         <li><a href="{{url('table')}}" >ตารางคะแนน</a></li>
         <li><a href="{{url('allclub')}}">สโมสร</a></li>
         <li><a href="mobile.html">ข่าวและประกาศ</a></li>
@@ -31,7 +31,7 @@
       </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i id="menu" class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down kanit">
-        <li><a href="sass.html">แมตซ์การแข่งขัน</a></li>
+        <li><a href="{{url('match')}}">แมตซ์การแข่งขัน</a></li>
         <li><a href="{{url('table')}}" >ตารางคะแนน</a></li>
         <li><a href="{{url('allclub')}}">สโมสร</a></li>
         <li><a href="mobile.html">ข่าวและประกาศ</a></li>
@@ -49,7 +49,7 @@
 
   <ul class="sidenav kanitlight" id="mobile-demo">
     <li><a href="{{url('/')}}" ><img src="{{URL::asset('photo/T1.png')}} "></a></li>
-    <li><a href="sass.html">แมตซ์การแข่งขัน</a></li>
+    <li><a href="{{url('match')}}">แมตซ์การแข่งขัน</a></li>
     <li><a href="{{url('table')}}" >ตารางคะแนน</a></li>
     <li><a href="{{url('allclub')}}">สโมสร</a></li>
     <li><a href="mobile.html">ข่าวและประกาศ</a></li>

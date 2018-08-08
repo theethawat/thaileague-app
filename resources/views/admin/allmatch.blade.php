@@ -164,7 +164,7 @@
             @endforeach
 
             <script>
-                $('#livematchbtn').tooltip("show")
+                $('#livematchbtn').tooltip("hover")
             </script>
 
             </tbody>

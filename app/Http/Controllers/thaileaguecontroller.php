@@ -134,4 +134,13 @@ class thaileaguecontroller extends Controller {
         
     }
 
+     public function showmatch(){
+        $activematchweek=DB::table('matchweek')->where('active','1')->first();
+        $match=DB::table('matchset')->where('matchweek',$activematchweek->matchweek)->orderBy('date','ASC')->orderBy('time','ASC')->get();
+        $overmatch=DB::table('matchset')->orderBy('date','ASC')->orderBy('time','ASC')->get();
+        return view('frontpage.allmatch')
+        ->with('allmatch',$match)
+        ->with('overmatch',$overmatch)
+        ->with('navtheme','');
+    }
 }

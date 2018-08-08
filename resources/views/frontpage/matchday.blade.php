@@ -14,7 +14,7 @@
         <div class="col s5 kanit ">
             <div class="flexdiv matchday-hteam"style="width:100%;">
                 <img style="margin-right:0.5em;"class="matchday-logo"src="{{URL::asset($hometeam->logo)}}">
-                <h6 class="matchday-teamname">{{$hometeam->thainame}}</h6>
+                <a href="{{url('clubinfo/'.$hometeam->englishname)}}"><h6 class="matchday-teamname">{{$hometeam->thainame}}</h6></a>
             </div>
         </div>
         
@@ -29,7 +29,7 @@
         <div class="col s5 kanit ">
             <div class="flexdiv matchday-ateam"style="width:100%;">
                 <img style="margin-right:0.5em;"class="matchday-logo"src="{{URL::asset($awayteam->logo)}}">
-                <h6 class="matchday-teamname">{{$awayteam->thainame}}</h6>
+                <a href="{{url('clubinfo/'.$awayteam->englishname)}}"><h6 class="matchday-teamname">{{$awayteam->thainame}}</h6></a>
             </div>
         </div>
 
@@ -83,6 +83,13 @@
                 @endif
                 
             </div>
+            <h6 class="kanit acenter">ทีมงานผู้ตัดสิน</h6>
+            <ul class="acenter">
+                <li class="kanit">ผู้ตัดสินที่ 1 <span class="kanitlight">{{$thismatch->referee1}} </span> </li>
+                <li class="kanit">ผู้ช่วยผู้ตัดสินที่ 1 <span class="kanitlight">{{$thismatch->referee2}} </span> </li>
+                <li class="kanit">ผู้ช่วยผู้ตัดสินที่ 2 <span class="kanitlight">{{$thismatch->referee3}} </span> </li>
+                <li class="kanit">ผู้ตัดสินที่ 4 <span class="kanitlight">{{$thismatch->referee4}} </span> </li>
+            </ul>
         </div>
     </div>
 
@@ -202,7 +209,7 @@
                 @endfor  
                 
                 </div>
-                <p class="kanitlight acenter">จัดตามสถานะ GK DF MF FW เท่านั้นไม่ได้จัดตามระบบการเล่น</p>
+                <p class="kanitlight acenter">จัดตามสถานะ GK DF MF FW ใน Line up เริ่มต้นเท่านั้นไม่ได้จัดตามระบบการเล่น ผู้เล่นจะเปลี่ยนไปตามการเปลี่ยนตัวผู้เล่น</p>
                 <br><br>
                 <hr class="hr-front">
                 

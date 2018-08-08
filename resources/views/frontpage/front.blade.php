@@ -8,7 +8,7 @@
     </div>
 
     <div class="content c-match">
-        <h5 class="kanit fronttitle red-text text-accent-4">Matchweek </h5><hr class="hr-front">
+        <h5 class="kanit fronttitle red-text text-accent-4">Matchweek <a class="waves-effect waves-light btn  red accent-4 kanit" href="{{url('match')}}"> ดูแมตซ์ทั้งหมด </a> </h5><hr class="hr-front">
         <table class="centered highlight">
         <thead>
         <!--

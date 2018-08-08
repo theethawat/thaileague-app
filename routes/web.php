@@ -60,4 +60,5 @@ Route::get('admin/warroom/owngoal/{id}/{team}/{player}','ThaileagueAdminControll
 Route::post('admin/warroom/finalscore','ThaileagueAdminController@finalscore');
 Route::post('admin/warroom/com','ThaileagueAdminController@comment');
 
-
+//Frontpage Extention
+Route::get('/match','thaileaguecontroller@showmatch');
