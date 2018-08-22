@@ -25,8 +25,8 @@
                 <label class="kanit"> ตำแหน่ง </label>
                 <select class="form-control" id="position" name="position" required>
                     <option value="GK">GK</option>
-                    <option value="MF">MF</option>
                     <option value="DF">DF</option>
+                    <option value="MF">MF</option>
                     <option value="FW">FW</option>
                 </select>
             </div>

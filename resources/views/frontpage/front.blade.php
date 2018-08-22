@@ -144,18 +144,17 @@
 
     <div class="content c-highlight">
         <h5 class="kanit fronttitle red-text text-accent-4"> Official Highlight</h5><hr class="hr-front">
-        <div class="flexdiv2">
+        <div class="flexdiv flexscroll">
         @foreach($matchhighlight as $hl)
-        <div class="card highlight-c" >
+        <div class=" highlight-c" >
             <!-- Card Content -->
-           
-                <div class="card-image">
-                    <img class="highlight-1" src="{{URL::asset('photo/t1_bgred.png')}} ">
-                </div>
-     
-                <div class="card-action" >
-                    <a class="red-text text-accent-4 kanit "href="{{url($hl->link)}}">{{$hl->hometeam}} VS {{$hl->awayteam}} </a>
-                 </div>
+            @if($hl->photo==NULL)
+            <img class="highlight-1" src="{{URL::asset('photo/t1_bgred.png')}} "><br>
+            @else
+            <img class="highlight-1" src="{{URL::asset($hl->photo)}} "><br>
+            @endif
+            <a class="red-text text-accent-4 kanit "href="{{url($hl->link)}}">{{$hl->hometeam}} VS {{$hl->awayteam}} </a>
+
             </div>
         @endforeach
         </div>

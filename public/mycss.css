@@ -5,6 +5,7 @@
     font-family: 'kanit',sans-serif;
     font-weight: 300;
 }
+
 .text-l1{
     font-size: 16px;
 }
@@ -69,7 +70,9 @@ div.flexdiv3{
     height:80px;
 }
 .highlight-c{
-    width:150px;
+    width:300px;
+    margin-left:0.5em;
+    margin-right:0.5em;
 }
 /*clubinfopage*/
 img.stadium-photo{ /*for sometime case*/

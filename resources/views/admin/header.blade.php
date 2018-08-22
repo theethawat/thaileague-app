@@ -8,13 +8,13 @@
   <div class="collapse navbar-collapse kanitlight" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item ">
-        <a class="nav-link" href="{{url('/admin/allteam')}}">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{url('/admin/allteam')}}">จัดการทีม <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
         <a class="nav-link" href="{{url('/admin/allmatch')}}">จัดการแมตซ์ <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{url('/')}}"> หน้าหลักแอป</a>
+        <a class="nav-link" href="{{url('/')}}" target="_blank"> หน้าหลักแอป</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>

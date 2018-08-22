@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{URL::asset('flag/css/flag-icon.css')}}">
     <link rel="stylesheet" href="{{URL::asset('flag/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('mycss.css')}}">
-    
+
     <!-- JQuery -->
     <script
 			  src="https://code.jquery.com/jquery-3.3.1.js"
